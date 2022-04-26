@@ -85,7 +85,7 @@
 
     <androidx.appcompat.widget.AppCompatTextView
         android:id="@+id/likesCount"
-        android:layout_width="wrap_content"
+        android:layout_width="36dp"
         android:layout_height="wrap_content"
         android:layout_marginStart="4dp"
         app:layout_constraintBottom_toBottomOf="@id/likes"
@@ -106,7 +106,7 @@
 
     <androidx.appcompat.widget.AppCompatTextView
         android:id="@+id/sharedCount"
-        android:layout_width="wrap_content"
+        android:layout_width="36dp"
         android:layout_height="wrap_content"
         android:layout_marginStart="4dp"
         app:layout_constraintBottom_toBottomOf="@id/likes"
@@ -131,12 +131,12 @@
 
     <androidx.appcompat.widget.AppCompatTextView
         android:id="@+id/viewsCount"
-        android:layout_width="24dp"
-        android:layout_height="0dp"
+        android:layout_width="36dp"
+        android:layout_height="wrap_content"
         android:singleLine="true"
         app:layout_constraintBottom_toBottomOf="@id/likes"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toTopOf="@id/likes"
-        tools:text="49" />
+        tools:text="493k" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>
