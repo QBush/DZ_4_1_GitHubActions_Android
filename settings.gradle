@@ -12,5 +12,5 @@ dependencyResolutionManagement {
         mavenCentral()
     }
 }
-rootProject.name = "DZ_1_Git_Hub_Action"
+rootProject.name = "NMedia"
 include ':app'
