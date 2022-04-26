@@ -67,13 +67,6 @@
         app:layout_constraintTop_toBottomOf="@id/headerBarrier"
         tools:text="@tools:sample/lorem/random" />
 
-    <androidx.constraintlayout.widget.Barrier
-        android:id="@+id/headerBarrier2"
-        android:layout_width="0dp"
-        android:layout_height="0dp"
-        app:barrierDirection="bottom"
-        app:constraint_referenced_ids="postsText" />
-
     <androidx.appcompat.widget.AppCompatImageButton
         android:id="@+id/likes"
         android:layout_width="wrap_content"
@@ -81,7 +74,7 @@
         android:layout_marginTop="@dimen/common_spacing"
         android:background="@android:color/transparent"
         android:src="@drawable/ic_baseline_favorite_border_24"
-        app:layout_constraintTop_toBottomOf="@id/headerBarrier2" />
+        app:layout_constraintTop_toBottomOf="@id/postsText" />
 
     <androidx.appcompat.widget.AppCompatTextView
         android:id="@+id/likesCount"
