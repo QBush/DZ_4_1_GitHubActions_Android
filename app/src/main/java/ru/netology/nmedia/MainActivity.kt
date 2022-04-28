@@ -16,20 +16,37 @@ class MainActivity : AppCompatActivity() {
         val binding = ActivityMainBinding.inflate(layoutInflater)
         setContentView(binding.root)
 
-        val post = Post (
-        id = 1,
-        author = "Netology",
-        content = "Привет! Это Нав... Это Нетология!",
-        published = "28.04.2022"
+        val post = Post(
+            id = 1,
+            author = "Netology",
+            content = "Привет! Это Нав... Это Нетология!",
+            published = "28.04.2022"
         )
 
+        with(binding) {
+            postListItem.authorName.text = post.author
+            postListItem.date.text = post.published
+            postListItem.postText.text = post.content
+            if (post.likedByMe) {
+                postListItem.likes.setImageResource(R.drawable.ic_liked_24)
+            }
+        }
 
-        binding.post.likes.setOnClickListener {
+        binding.postListItem.likes.setOnClickListener {
             post.likedByMe = !post.likedByMe
-            val imageResId = if(post.likedByMe) R.drawable.ic_liked_24 else R.drawable.ic_like_24
-            binding.post.likes.setImageResource(imageResId)
+            val imageResId =
+                if (post.likedByMe) R.drawable.ic_liked_24 else R.drawable.ic_like_24
+            binding.postListItem.likes.setImageResource(imageResId)
         }
     }
-
-
 }
+//    private fun ActivityMainBinding.render(post: Post) {
+//        postListItem.authorName.text = post.author
+//        postListItem.date.text = post.published
+//        postListItem.postText.text = post.content
+//    }
+//
+//    private fun getLikeIconResId (liked: Boolean) =
+//        if (liked) R.drawable.ic_liked_24 else R.drawable.ic_like_24
+//
+//}

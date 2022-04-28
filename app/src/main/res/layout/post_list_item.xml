@@ -11,9 +11,9 @@
         android:layout_width="@dimen/post_avatar_size"
         android:layout_height="@dimen/post_avatar_size"
         android:contentDescription="@string/author_avatar"
-        tools:srcCompat="@tool/avatars"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        app:layout_constraintTop_toTopOf="parent"
+        tools:srcCompat="@drawable/ic_launcher_foreground" />
 
     <androidx.appcompat.widget.AppCompatTextView
         android:id="@+id/authorName"
@@ -58,7 +58,7 @@
         app:constraint_referenced_ids="authorName,date,avatarImage" />
 
     <androidx.appcompat.widget.AppCompatTextView
-        android:id="@+id/postsText"
+        android:id="@+id/postText"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_marginTop="@dimen/common_spacing"
@@ -72,7 +72,7 @@
         android:layout_marginTop="@dimen/common_spacing"
         android:background="@android:color/transparent"
         android:src="@drawable/ic_like_24"
-        app:layout_constraintTop_toBottomOf="@id/postsText" />
+        app:layout_constraintTop_toBottomOf="@id/postText" />
 
     <androidx.appcompat.widget.AppCompatTextView
         android:id="@+id/likesCount"
