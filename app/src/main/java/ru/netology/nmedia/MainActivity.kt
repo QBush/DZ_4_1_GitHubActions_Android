@@ -11,6 +11,8 @@ class MainActivity : AppCompatActivity() {
 
     private var likeCount = 0
     private var shareCount = 0
+    private var viewCount = 0
+
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -38,22 +40,25 @@ class MainActivity : AppCompatActivity() {
             post.likedByMe = !post.likedByMe
             val imageResId =
                 if (post.likedByMe) {
-                    binding.likesCount.text = (likeCount++).toString()
+                    binding.likesCount.text = thousentKChanger(++likeCount)
                     R.drawable.ic_liked_24
                 } else {
-                    binding.likesCount.text = (likeCount--).toString()
+                    binding.likesCount.text = thousentKChanger(--likeCount)
                     R.drawable.ic_like_24
                 }
             binding.likes.setImageResource(imageResId)
         }
 
         binding.share.setOnClickListener {
-            binding.sharedCount.text = (shareCount++).toString()
+            binding.sharedCount.text = thousentKChanger(++shareCount)
         }
 
+        binding.root.setOnClickListener {
+            println("Поехали")
+        }
     }
 
-    private fun thousentKChanger(number: Long): String =
+    private fun thousentKChanger(number: Int): String =
         when (number) {
             in 1..1000 -> number.toString()
             in 1001..9999 -> "${String.format("%.1f", (number.toDouble() / 1000))}K"
