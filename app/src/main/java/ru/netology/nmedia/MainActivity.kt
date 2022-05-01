@@ -52,15 +52,6 @@ class MainActivity : AppCompatActivity() {
         binding.share.setOnClickListener {
             binding.sharedCount.text = thousentKChanger(++shareCount)
         }
-
-        binding.root.setOnClickListener {
-            println("Поехали")
-        }
-
-        binding.avatarImage.setOnClickListener {
-            println("Аватар поехал")
-        }
-
     }
 
     private fun thousentKChanger(number: Int): String =
