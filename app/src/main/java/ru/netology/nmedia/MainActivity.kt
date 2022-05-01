@@ -34,33 +34,33 @@ class MainActivity : AppCompatActivity() {
             if (post.likedByMe) {
                 likes.setImageResource(R.drawable.ic_liked_24)
             }
-        }
 
-        binding.likes.setOnClickListener {
-            post.likedByMe = !post.likedByMe
-            val imageResId =
-                if (post.likedByMe) {
-                    binding.likesCount.text = thousentKChanger(++likeCount)
-                    R.drawable.ic_liked_24
-                } else {
-                    binding.likesCount.text = thousentKChanger(--likeCount)
-                    R.drawable.ic_like_24
-                }
-            binding.likes.setImageResource(imageResId)
-        }
 
-        binding.share.setOnClickListener {
-            binding.sharedCount.text = thousentKChanger(++shareCount)
-        }
+           likes.setOnClickListener {
+                post.likedByMe = !post.likedByMe
+                val imageResId =
+                    if (post.likedByMe) {
+                        likesCount.text = thousentKChanger(++likeCount)
+                        R.drawable.ic_liked_24
+                    } else {
+                        likesCount.text = thousentKChanger(--likeCount)
+                        R.drawable.ic_like_24
+                    }
+                likes.setImageResource(imageResId)
+            }
 
-        binding.root.setOnClickListener {
-            println("Поехали")
-        }
+           share.setOnClickListener {
+                sharedCount.text = thousentKChanger(++shareCount)
+            }
 
-        binding.avatarImage.setOnClickListener {
-            println("Аватар поехал")
-        }
+            root.setOnClickListener {
+                println("Поехали")
+            }
 
+            avatarImage.setOnClickListener {
+                println("Аватар поехал")
+            }
+        }
     }
 
     private fun thousentKChanger(number: Int): String =
