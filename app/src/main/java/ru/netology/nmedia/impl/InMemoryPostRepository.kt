@@ -24,5 +24,6 @@ class InMemoryPostRepository : PostRepository {
         val likedPost = currentPost.copy(
             likedByMe = !currentPost.likedByMe
         )
+        data.value = likedPost
     }
 }
