@@ -36,7 +36,7 @@ class MainActivity : AppCompatActivity() {
             }
 
 
-           likes.setOnClickListener {
+            likes.setOnClickListener {
                 post.likedByMe = !post.likedByMe
                 val imageResId =
                     if (post.likedByMe) {
@@ -49,20 +49,12 @@ class MainActivity : AppCompatActivity() {
                 likes.setImageResource(imageResId)
             }
 
-           share.setOnClickListener {
+            share.setOnClickListener {
                 sharedCount.text = thousentKChanger(++shareCount)
-            }
-
-            root.setOnClickListener {
-                println("Поехали")
-            }
-
-            avatarImage.setOnClickListener {
-                println("Аватар поехал")
             }
         }
     }
-
+}
     private fun thousentKChanger(number: Int): String =
         when (number) {
             0 -> ""
@@ -85,4 +77,3 @@ class MainActivity : AppCompatActivity() {
 //        if (liked) R.drawable.ic_liked_24 else R.drawable.ic_like_24
 
 
-}
