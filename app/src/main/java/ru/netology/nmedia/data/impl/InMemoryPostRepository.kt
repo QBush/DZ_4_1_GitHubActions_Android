@@ -16,7 +16,7 @@ class InMemoryPostRepository : PostRepository {
         )
     )
 
-    override var likeCount = MutableLiveData<Int>(0)
+    override val likeCount = MutableLiveData<Int>(0)
     override val shareCount = MutableLiveData<Int>(0)
 
 
