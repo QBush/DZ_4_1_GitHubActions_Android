@@ -16,14 +16,30 @@ class InMemoryPostRepository : PostRepository {
         )
     )
 
+    override val likeCount = MutableLiveData<Int>(0)
 
     override fun like() {
         val currentPost = checkNotNull(data.value) {
             "value should not be null"
         }
+
         val likedPost = currentPost.copy(
             likedByMe = !currentPost.likedByMe
         )
+
+        if (likedPost.likedByMe) {
+            likeCount.value = likeCount.value?.plus(1)
+        } else {
+            likeCount.value = likeCount.value?.minus(1)
+        }
+
         data.value = likedPost
+
+
+    }
+
+    override fun share() {
+
     }
 }
+

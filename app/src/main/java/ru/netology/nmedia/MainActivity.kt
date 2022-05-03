@@ -11,7 +11,7 @@ import ru.netology.nmedia.viewModel.PostViewModel
 
 class MainActivity : AppCompatActivity() {
 
-    private var likeCount = 0
+
     private var shareCount = 0
     private var viewCount = 0
 
@@ -25,6 +25,10 @@ class MainActivity : AppCompatActivity() {
 
         viewModel.data.observe(this) {
             binding.render(it)
+        }
+
+        viewModel.likeCount.observe(this) {
+            binding.likesCount.text = thousentKChanger(it)
         }
 
         binding.likes.setOnClickListener {

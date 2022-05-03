@@ -10,6 +10,8 @@ class PostViewModel : ViewModel() {
     val data by repository::data
 //val data get() = repository.data - аналогично строчке выше
 
+    val likeCount by repository::likeCount
+
     fun onLikeClick() = repository.like()
 
 
