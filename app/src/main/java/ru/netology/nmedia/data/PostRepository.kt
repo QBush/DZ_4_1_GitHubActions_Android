@@ -5,11 +5,11 @@ import ru.netology.nmedia.Post
 
 interface PostRepository {
 
-    val data : LiveData <Post>
+    val data: LiveData<Post>
 
     val likeCount: LiveData<Int>
+    val shareCount: LiveData<Int>
 
     fun like()
-
     fun share()
 }

@@ -16,7 +16,9 @@ class InMemoryPostRepository : PostRepository {
         )
     )
 
-    override val likeCount = MutableLiveData<Int>(0)
+    override var likeCount = MutableLiveData<Int>(0)
+    override val shareCount = MutableLiveData<Int>(0)
+
 
     override fun like() {
         val currentPost = checkNotNull(data.value) {
@@ -32,14 +34,11 @@ class InMemoryPostRepository : PostRepository {
         } else {
             likeCount.value = likeCount.value?.minus(1)
         }
-
         data.value = likedPost
-
-
     }
 
     override fun share() {
-
+        shareCount.value = shareCount.value?.plus(1)
     }
 }
 

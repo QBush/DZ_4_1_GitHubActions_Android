@@ -12,7 +12,6 @@ import ru.netology.nmedia.viewModel.PostViewModel
 class MainActivity : AppCompatActivity() {
 
 
-    private var shareCount = 0
     private var viewCount = 0
 
     private val viewModel by viewModels<PostViewModel>()
@@ -31,12 +30,16 @@ class MainActivity : AppCompatActivity() {
             binding.likesCount.text = thousentKChanger(it)
         }
 
+        viewModel.shareCount.observe(this) {
+            binding.sharedCount.text = thousentKChanger(it)
+        }
+
         binding.likes.setOnClickListener {
             viewModel.onLikeClick()
         }
 
         binding.share.setOnClickListener {
-            binding.sharedCount.text = thousentKChanger(++shareCount)
+            viewModel.onShareClick()
         }
     }
 }
@@ -55,17 +58,9 @@ private fun PostListItemBinding.render(post: Post) {
     date.text = post.published
     postText.text = post.content
     likes.setImageResource(getLikeIconResId(post.likedByMe))
-
-
 }
 
 private fun getLikeIconResId(liked: Boolean) =
-    if (liked) {
-//        binding.likesCount.text = thousentKChanger(++likeCount)
-        R.drawable.ic_liked_24
-    } else {
-//        binding.likesCount.text = thousentKChanger(--likeCount)
-        R.drawable.ic_like_24
-    }
+    if (liked) R.drawable.ic_liked_24 else R.drawable.ic_like_24
 
 
