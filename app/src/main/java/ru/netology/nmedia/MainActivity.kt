@@ -5,6 +5,7 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.widget.ImageButton
 import androidx.activity.viewModels
+import ru.netology.nmedia.data.impl.PostAdapter
 import ru.netology.nmedia.databinding.ActivityMainBinding
 import ru.netology.nmedia.databinding.PostListItemBinding
 import ru.netology.nmedia.viewModel.PostViewModel
@@ -17,12 +18,16 @@ class MainActivity : AppCompatActivity() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-
         val binding = ActivityMainBinding.inflate(layoutInflater)
         setContentView(binding.root)
 
+        val adapter = PostAdapter(viewModel::onLikeClick)
+        binding.PostsRecycleView.adapter =
+
         viewModel.data.observe(this) {
-            binding.render(it)
+            adapter.posts = it
+            )
+//            binding.render(it)
         }
 
 //        viewModel.likeCount.observe(this) {
@@ -37,27 +42,6 @@ class MainActivity : AppCompatActivity() {
 //            viewModel.onShareClick()
 //        }
     }
-
-    private fun ActivityMainBinding.render(posts: List<Post>) {
-        for (post in posts) {
-            val postBinding = PostListItemBinding.inflate(
-                layoutInflater, postsLeanerLayout, true
-            )
-//            root.addView(PostListItemBinding.root) - то же самое, если вторые 2 показателя не писать
-            postBinding.render(post)
-        }
-    }
-
-    private fun PostListItemBinding.render(post: Post) {
-        authorName.text = post.author
-        date.text = post.published
-        postText.text = post.content
-        likes.setImageResource(getLikeIconResId(post.likedByMe))
-        likes.setOnClickListener { viewModel.onLikeClick(post) }
-    }
-
-    private fun getLikeIconResId(liked: Boolean) =
-        if (liked) R.drawable.ic_liked_24 else R.drawable.ic_like_24
 
     private fun thousentKChanger(number: Int): String =
         when (number) {
