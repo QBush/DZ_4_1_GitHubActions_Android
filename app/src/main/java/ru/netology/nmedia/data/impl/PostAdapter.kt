@@ -2,6 +2,8 @@ package ru.netology.nmedia.data.impl
 
 import android.view.LayoutInflater
 import android.view.ViewGroup
+import androidx.recyclerview.widget.DiffUtil
+import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
 import ru.netology.nmedia.Post
 import ru.netology.nmedia.R
@@ -10,11 +12,7 @@ import kotlin.properties.Delegates
 
 internal class PostAdapter(
     private val onLikeClicked: (Post) -> Unit
-) : RecyclerView.Adapter<PostAdapter.ViewHolder>(){
-
-    var posts: List<Post> by Delegates.observable(emptyList()) {_,_,_ ->
-        notifyDataSetChanged()
-    }
+) : ListAdapter<Post, PostAdapter.ViewHolder>(DiffCallback){
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
         val inflater = LayoutInflater.from(parent.context)
@@ -23,10 +21,10 @@ internal class PostAdapter(
     }
 
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
-        holder.bind(posts[position])
+        holder.bind(getItem(position))
     }
 
-    override fun getItemCount() = posts.size
+//    override fun getItemCount() = posts.size - не нужно для ListAdapter, только для RecycleView.Adapter
 
     inner class ViewHolder(
         private val binding: PostListItemBinding
@@ -38,10 +36,22 @@ internal class PostAdapter(
             postText.text = post.content
             likes.setImageResource(getLikeIconResId(post.likedByMe))
             likes.setOnClickListener { onLikeClicked(post) }
+
         }
 
         private fun getLikeIconResId(liked: Boolean) =
             if (liked) R.drawable.ic_liked_24 else R.drawable.ic_like_24
     }
 
+
+    // для сравнения объектов через ListAdapter
+    private object DiffCallback : DiffUtil.ItemCallback<Post>() {
+
+        override fun areItemsTheSame(oldItem: Post, newItem: Post): Boolean =
+            oldItem.id == newItem.id
+
+
+        override fun areContentsTheSame(oldItem: Post, newItem: Post): Boolean =
+            oldItem == newItem
+    }
 }
