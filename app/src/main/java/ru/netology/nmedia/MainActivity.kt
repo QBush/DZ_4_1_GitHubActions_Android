@@ -28,9 +28,9 @@ class MainActivity : AppCompatActivity() {
             adapter.submitList(it)
         }
 
-        viewModel.likeCount.observe(this) {
-            adapter.submitList(it)
-        }
+//        viewModel.likeCount.observe(this) {
+//            adapter.submitList(it)
+//        }
     }
 
 

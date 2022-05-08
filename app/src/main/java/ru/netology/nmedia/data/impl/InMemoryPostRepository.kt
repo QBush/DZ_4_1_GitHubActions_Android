@@ -23,16 +23,14 @@ class InMemoryPostRepository : PostRepository {
         }
     )
 
-    override val likeCount = MutableLiveData<Int>(10)
-    override val shareCount = MutableLiveData<Int>(0)
 
     override fun like(postID: Long) {
         data.value = posts.map {
             if (it.id == postID) {
                 if (it.likedByMe) {
-                    likeCount.value = likeCount.value?.minus(1)
+                    it.likeCount.value = likeCount.value?.minus(1)
                 } else {
-                    likeCount.value = likeCount.value?.plus(1)
+                    it.likeCount.value = likeCount.value?.plus(1)
                 }
                 it.copy(likedByMe = !it.likedByMe)
             } else it
@@ -40,8 +38,12 @@ class InMemoryPostRepository : PostRepository {
     }
 
 
-    override fun share() {
-        shareCount.value = shareCount.value?.plus(1)
+    override fun share(postID: Long) {
+            data.value = posts.map {
+                if (it.id == postID) {
+                it.copy(it.likeCount = it.likeCount)
+            }
+        }
     }
 }
 
