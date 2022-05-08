@@ -28,21 +28,21 @@ class InMemoryPostRepository : PostRepository {
         data.value = posts.map {
             if (it.id == postID) {
                 if (it.likedByMe) {
-                    it.likeCount.value = likeCount.value?.minus(1)
+                    it.likeCount.value = it.likeCount.value?.minus(1)
                 } else {
-                    it.likeCount.value = likeCount.value?.plus(1)
+                    it.likeCount.value = it.likeCount.value?.plus(1)
                 }
                 it.copy(likedByMe = !it.likedByMe)
             } else it
         }
     }
 
-
     override fun share(postID: Long) {
             data.value = posts.map {
                 if (it.id == postID) {
-                it.copy(it.likeCount = it.likeCount)
-            }
+                    it.shareCount.value = it.shareCount.value?.plus(1)
+                    it
+            } else it
         }
     }
 }
