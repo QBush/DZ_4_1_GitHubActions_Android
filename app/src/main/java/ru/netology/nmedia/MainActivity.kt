@@ -9,9 +9,7 @@ import ru.netology.nmedia.databinding.PostListItemBinding
 
 class MainActivity : AppCompatActivity() {
 
-    private var likeCount = 0
-    private var shareCount = 0
-    private var viewCount = 0
+
 
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -40,17 +38,17 @@ class MainActivity : AppCompatActivity() {
             post.likedByMe = !post.likedByMe
             val imageResId =
                 if (post.likedByMe) {
-                    binding.likesCount.text = thousentKChanger(++likeCount)
+                    binding.likesCount.text = thousentKChanger(++post.likeCount)
                     R.drawable.ic_liked_24
                 } else {
-                    binding.likesCount.text = thousentKChanger(--likeCount)
+                    binding.likesCount.text = thousentKChanger(--post.likeCount)
                     R.drawable.ic_like_24
                 }
             binding.likes.setImageResource(imageResId)
         }
 
         binding.share.setOnClickListener {
-            binding.sharedCount.text = thousentKChanger(++shareCount)
+            binding.sharedCount.text = thousentKChanger(++post.shareCount)
         }
     }
 
