@@ -22,6 +22,7 @@ internal class PostAdapter(
 
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
         holder.bind(getItem(position))
+
     }
 
 
@@ -37,6 +38,7 @@ internal class PostAdapter(
             postText.text = post.content
             likes.setImageResource(getLikeIconResId(post.likedByMe))
             likes.setOnClickListener { onLikeClicked(post) }
+            likesCount.text = likeCount
         }
 
 
