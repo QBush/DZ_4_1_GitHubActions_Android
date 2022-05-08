@@ -24,6 +24,7 @@ internal class PostAdapter(
         holder.bind(getItem(position))
     }
 
+
 //    override fun getItemCount() = posts.size - не нужно для ListAdapter, только для RecycleView.Adapter
 
     inner class ViewHolder(
@@ -36,8 +37,9 @@ internal class PostAdapter(
             postText.text = post.content
             likes.setImageResource(getLikeIconResId(post.likedByMe))
             likes.setOnClickListener { onLikeClicked(post) }
-
         }
+
+
 
         private fun getLikeIconResId(liked: Boolean) =
             if (liked) R.drawable.ic_liked_24 else R.drawable.ic_like_24

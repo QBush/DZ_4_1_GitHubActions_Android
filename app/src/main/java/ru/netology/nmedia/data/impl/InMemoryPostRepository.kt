@@ -23,7 +23,7 @@ class InMemoryPostRepository : PostRepository {
         }
     )
 
-    override val likeCount = MutableLiveData<Int>(0)
+    override val likeCount = MutableLiveData<Int>(10)
     override val shareCount = MutableLiveData<Int>(0)
 
     override fun like(postID: Long) {

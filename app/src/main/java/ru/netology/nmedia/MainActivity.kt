@@ -27,7 +27,12 @@ class MainActivity : AppCompatActivity() {
         viewModel.data.observe(this) {
             adapter.submitList(it)
         }
+
+//        viewModel.likeCount.observe(this) {
+//            adapter.submitList(it)
+//        }
     }
+
 
 //        viewModel.likeCount.observe(this) {
 //            binding.likesCount.text = thousentKChanger(it)
