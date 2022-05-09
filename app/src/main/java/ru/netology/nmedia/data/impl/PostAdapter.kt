@@ -37,7 +37,7 @@ internal class PostAdapter(
             postText.text = post.content
             likes.setImageResource(getLikeIconResId(post.likedByMe))
             likes.setOnClickListener { onLikeClicked(post) }
-//            likesCount.text = likeCount
+            likesCount.text = thousandKChanger(post.likeCount)
         }
 
 
@@ -46,6 +46,14 @@ internal class PostAdapter(
             if (liked) R.drawable.ic_liked_24 else R.drawable.ic_like_24
     }
 
+    private fun thousandKChanger(number: Long): String =
+        when (number) {
+            0L -> ""
+            in 1..999 -> number.toString()
+            in 1000..9999 -> "${String.format("%.1f", (number.toDouble() / 1000))}K"
+            in 10_000..999_999 -> "${number / 1000}K"
+            else -> "${number / 1_000_000}M"
+        }
 
     // для сравнения объектов через ListAdapter
     private object DiffCallback : DiffUtil.ItemCallback<Post>() {
