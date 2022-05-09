@@ -11,7 +11,8 @@ import ru.netology.nmedia.databinding.PostListItemBinding
 import kotlin.properties.Delegates
 
 internal class PostAdapter(
-    private val onLikeClicked: (Post) -> Unit
+    private val onLikeClicked: (Post) -> Unit,
+    private val onShareClick: (Post) -> Unit
 ) : ListAdapter<Post, PostAdapter.ViewHolder>(DiffCallback){
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
@@ -37,9 +38,10 @@ internal class PostAdapter(
             postText.text = post.content
             likes.setImageResource(getLikeIconResId(post.likedByMe))
             likes.setOnClickListener { onLikeClicked(post) }
+            share.setOnClickListener {onShareClick(post)}
             likesCount.text = thousandKChanger(post.likeCount)
+            sharedCount.text = thousandKChanger(post.shareCount)
         }
-
 
 
         private fun getLikeIconResId(liked: Boolean) =

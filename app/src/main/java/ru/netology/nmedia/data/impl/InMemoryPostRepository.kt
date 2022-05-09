@@ -28,10 +28,8 @@ class InMemoryPostRepository : PostRepository {
             if (it.id == postID) {
                 if (it.likedByMe) {
                     it.likeCount--
-                    println("уменьшили на 1")
                 } else {
                     it.likeCount++
-                    println("увеличили на 1")
                 }
                 it.copy(likedByMe = !it.likedByMe)
             } else it
@@ -41,8 +39,7 @@ class InMemoryPostRepository : PostRepository {
     override fun share(postID: Long) {
             data.value = posts.map {
                 if (it.id == postID) {
-                    it.shareCount++
-                    it
+                    it.copy(shareCount = it.shareCount+1)
             } else it
         }
     }
