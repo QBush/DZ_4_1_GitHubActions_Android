@@ -1,4 +1,4 @@
-package ru.netology.nmedia.data.impl
+package ru.netology.nmedia.adapter
 
 import android.view.LayoutInflater
 import android.view.ViewGroup
@@ -8,12 +8,10 @@ import androidx.recyclerview.widget.RecyclerView
 import ru.netology.nmedia.Post
 import ru.netology.nmedia.R
 import ru.netology.nmedia.databinding.PostListItemBinding
-import kotlin.properties.Delegates
 
 internal class PostAdapter(
-    private val onLikeClicked: (Post) -> Unit,
-    private val onShareClick: (Post) -> Unit
-) : ListAdapter<Post, PostAdapter.ViewHolder>(DiffCallback){
+    private val interactionListener: PostInteractionListener
+) : ListAdapter<Post, PostAdapter.ViewHolder>(DiffCallback) {
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
         val inflater = LayoutInflater.from(parent.context)
@@ -32,13 +30,19 @@ internal class PostAdapter(
         private val binding: PostListItemBinding
     ) : RecyclerView.ViewHolder(binding.root) {
 
+//        private lateinit var post : Post
+//        init {
+//            binding.likes.setOnClickListener { onLikeClicked(post) }
+//            binding.share.setOnClickListener { onShareClick(post) }
+//        }
+
         fun bind(post: Post) = with(binding) {
             authorName.text = post.author
             date.text = post.published
             postText.text = post.content
             likes.setImageResource(getLikeIconResId(post.likedByMe))
             likes.setOnClickListener { onLikeClicked(post) }
-            share.setOnClickListener {onShareClick(post)}
+            share.setOnClickListener { onShareClick(post) }
             likesCount.text = thousandKChanger(post.likeCount)
             sharedCount.text = thousandKChanger(post.shareCount)
         }

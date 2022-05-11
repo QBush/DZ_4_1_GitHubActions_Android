@@ -37,11 +37,16 @@ class InMemoryPostRepository : PostRepository {
     }
 
     override fun share(postID: Long) {
-            data.value = posts.map {
-                if (it.id == postID) {
-                    it.copy(shareCount = it.shareCount+1)
+        data.value = posts.map {
+            if (it.id == postID) {
+                it.copy(shareCount = it.shareCount + 1)
             } else it
         }
     }
+
+    override fun delete(postID: Long) {
+        data.value = posts.filter { it.id != postID }
+    }
+
 }
 
