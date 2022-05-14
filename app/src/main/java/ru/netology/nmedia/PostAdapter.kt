@@ -1,14 +1,11 @@
-package ru.netology.nmedia.data.impl
+package ru.netology.nmedia
 
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
-import ru.netology.nmedia.Post
-import ru.netology.nmedia.R
 import ru.netology.nmedia.databinding.PostListItemBinding
-import kotlin.properties.Delegates
 
 internal class PostAdapter(
     private val onLikeClicked: (Post) -> Unit,

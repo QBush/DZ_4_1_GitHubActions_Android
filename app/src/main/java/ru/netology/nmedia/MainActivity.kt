@@ -2,12 +2,8 @@ package ru.netology.nmedia
 
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
-import android.view.LayoutInflater
-import android.widget.ImageButton
 import androidx.activity.viewModels
-import ru.netology.nmedia.data.impl.PostAdapter
 import ru.netology.nmedia.databinding.ActivityMainBinding
-import ru.netology.nmedia.databinding.PostListItemBinding
 import ru.netology.nmedia.viewModel.PostViewModel
 
 
