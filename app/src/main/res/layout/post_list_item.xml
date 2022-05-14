@@ -63,7 +63,7 @@
         android:layout_height="wrap_content"
         android:layout_marginTop="@dimen/common_spacing"
         app:layout_constraintTop_toBottomOf="@id/headerBarrier"
-        tools:text="Добро пожаловать в Нетологию!" />
+        tools:text="Здесь должен быть длинный текст." />
 
     <androidx.appcompat.widget.AppCompatImageButton
         android:id="@+id/likes"

@@ -1,7 +1,9 @@
 package ru.netology.nmedia.adapter
 
+import android.system.Os.remove
 import android.view.LayoutInflater
 import android.view.ViewGroup
+import android.widget.PopupMenu
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
@@ -30,23 +32,40 @@ internal class PostAdapter(
         private val binding: PostListItemBinding
     ) : RecyclerView.ViewHolder(binding.root) {
 
-//        private lateinit var post : Post
-//        init {
-//            binding.likes.setOnClickListener { onLikeClicked(post) }
-//            binding.share.setOnClickListener { onShareClick(post) }
-//        }
+        private lateinit var post: Post
 
-        fun bind(post: Post) = with(binding) {
-            authorName.text = post.author
-            date.text = post.published
-            postText.text = post.content
-            likes.setImageResource(getLikeIconResId(post.likedByMe))
-            likes.setOnClickListener { onLikeClicked(post) }
-            share.setOnClickListener { onShareClick(post) }
-            likesCount.text = thousandKChanger(post.likeCount)
-            sharedCount.text = thousandKChanger(post.shareCount)
+        private val popupMenu by lazy {
+            PopupMenu(itemView.context, binding.options).apply {
+                inflate(R.menu.options_post)
+                setOnMenuItemClickListener { menuItem ->
+                    when (menuItem.itemId) {
+                        R.id.remove -> {
+                            interactionListener.onRemoveClick(post)
+                            true
+                        }
+                        else -> false
+                    }
+                }
+            }
         }
 
+        init {
+            binding.likes.setOnClickListener { interactionListener.onLikeClick(post) }
+            binding.share.setOnClickListener { interactionListener.onShareClick(post) }
+        }
+
+        fun bind(post: Post) {
+            this.post = post
+            with(binding) {
+                authorName.text = post.author
+                date.text = post.published
+                postText.text = post.content
+                likes.setImageResource(getLikeIconResId(post.likedByMe))
+                likesCount.text = thousandKChanger(post.likeCount)
+                sharedCount.text = thousandKChanger(post.shareCount)
+                options.setOnClickListener { popupMenu.show() }
+            }
+        }
 
         private fun getLikeIconResId(liked: Boolean) =
             if (liked) R.drawable.ic_liked_24 else R.drawable.ic_like_24

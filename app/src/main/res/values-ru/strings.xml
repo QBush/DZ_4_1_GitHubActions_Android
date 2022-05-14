@@ -4,4 +4,11 @@
     <string name="Gracia">НМедиа!</string>
     <string name="author_avatar">Аватар автора</string>
     <string name="remove">Удалить</string>
+    <string name="post_text">Текст поста</string>
+    <string name="menu_edit">Редактировать</string>
+    <string name="error_empty_content">Пост не может быть пустым</string>
+    <string name="description_post_like">Лайк</string>
+    <string name="description_post_menu">Меню</string>
+    <string name="description_post_share">Поделиться</string>
+    <string name="description_post_save">Сохранить</string>
 </resources>
