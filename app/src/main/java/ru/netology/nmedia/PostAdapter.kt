@@ -29,15 +29,19 @@ internal class PostAdapter(
         private val binding: PostListItemBinding
     ) : RecyclerView.ViewHolder(binding.root) {
 
-        fun bind(post: Post) = with(binding) {
-            authorName.text = post.author
-            date.text = post.published
-            postText.text = post.content
-            likes.setImageResource(getLikeIconResId(post.likedByMe))
-            likes.setOnClickListener { onLikeClicked(post) }
-            share.setOnClickListener {onShareClick(post)}
-            likesCount.text = thousandKChanger(post.likeCount)
-            sharedCount.text = thousandKChanger(post.shareCount)
+        private lateinit var post: Post
+
+        fun bind(post: Post) {
+            this.post = post
+            with(binding) {
+                authorName.text = post.author
+                date.text = post.published
+                postText.text = post.content
+                likes.setImageResource(getLikeIconResId(post.likedByMe))
+                likesCount.text = thousandKChanger(post.likeCount)
+                sharedCount.text = thousandKChanger(post.shareCount)
+//                options.setOnClickListener { popupMenu.show() }
+            }
         }
 
 
