@@ -1,7 +1,9 @@
 package ru.netology.nmedia.adapter
 
+import android.system.Os.remove
 import android.view.LayoutInflater
 import android.view.ViewGroup
+import android.widget.PopupMenu
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
@@ -10,9 +12,8 @@ import ru.netology.nmedia.R
 import ru.netology.nmedia.databinding.PostListItemBinding
 
 internal class PostAdapter(
-    private val onLikeClicked: (Post) -> Unit,
-    private val onShareClick: (Post) -> Unit
-) : ListAdapter<Post, PostAdapter.ViewHolder>(DiffCallback){
+    private val interactionListener: PostInteractionListener
+) : ListAdapter<Post, PostAdapter.ViewHolder>(DiffCallback) {
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
         val inflater = LayoutInflater.from(parent.context)
@@ -31,7 +32,26 @@ internal class PostAdapter(
         private val binding: PostListItemBinding
     ) : RecyclerView.ViewHolder(binding.root) {
 
+        init {
+            binding.likes.setOnClickListener { interactionListener.onLikeClick(post) }
+            binding.share.setOnClickListener { interactionListener.onShareClick(post) }
+        }
         private lateinit var post: Post
+
+        private val popupMenu by lazy {
+            PopupMenu(itemView.context, binding.options).apply {
+                inflate(R.menu.options_post)
+                setOnMenuItemClickListener { menuItem ->
+                    when (menuItem.itemId) {
+                        R.id.remove -> {
+                            interactionListener.onRemoveClick(post)
+                            true
+                        }
+                        else -> false
+                    }
+                }
+            }
+        }
 
         fun bind(post: Post) {
             this.post = post
@@ -42,7 +62,7 @@ internal class PostAdapter(
                 likes.setImageResource(getLikeIconResId(post.likedByMe))
                 likesCount.text = thousandKChanger(post.likeCount)
                 sharedCount.text = thousandKChanger(post.shareCount)
-//                options.setOnClickListener { popupMenu.show() }
+                options.setOnClickListener { popupMenu.show() }
             }
         }
 
