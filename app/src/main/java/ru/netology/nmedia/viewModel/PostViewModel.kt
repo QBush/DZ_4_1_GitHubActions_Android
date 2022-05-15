@@ -1,5 +1,6 @@
 package ru.netology.nmedia.viewModel
 
+import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import ru.netology.nmedia.Post
 import ru.netology.nmedia.adapter.PostInteractionListener
@@ -11,6 +12,8 @@ class PostViewModel : ViewModel(), PostInteractionListener {
 
     val data by repository::data
 
+    val currentPost = MutableLiveData<Post?>(null)
+
     fun onSaveButtonClick(content: String) {
         if (content.isBlank()) return
         val newPost = Post(
@@ -20,6 +23,7 @@ class PostViewModel : ViewModel(), PostInteractionListener {
             published = "12.05.2022"
         )
         repository.save(newPost)
+        currentPost.value = null
     }
 
 
