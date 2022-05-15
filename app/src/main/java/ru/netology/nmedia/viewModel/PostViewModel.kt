@@ -14,24 +14,34 @@ class PostViewModel : ViewModel(), PostInteractionListener {
 
     val currentPost = MutableLiveData<Post?>(null)
 
+    //region MenuInteractionListener
+
     fun onSaveButtonClick(content: String) {
         if (content.isBlank()) return
-        val newPost = Post(
+        val post = currentPost.value?.copy(
+            content = content // что это?
+        ) ?: Post(
             id = PostRepository.NEW_POST_ID,
             author = "me",
             content = content,
             published = "12.05.2022"
         )
-        repository.save(newPost)
+        repository.save(post)
         currentPost.value = null
     }
 
+    override fun onEditClick(post: Post) {
+        currentPost.value = post
+    }
+
+    //endregion MenuInteractionListener
 
     //region PostInteractionListener
 
     override fun onLikeClick(post: Post) = repository.like(post.id)
     override fun onShareClick(post: Post) = repository.share(post.id)
     override fun onRemoveClick(post: Post) = repository.delete(post.id)
+
 
     // endregion PostInteractionListener
 }

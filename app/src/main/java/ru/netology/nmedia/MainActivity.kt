@@ -35,9 +35,10 @@ class MainActivity : AppCompatActivity() {
                 text = null
             }
         }
-//        viewModel.currentPost.observe(this) { currentPost ->
-//            binding.contentEditText.setText(currentPost?.content)
-//        }
+
+        viewModel.currentPost.observe(this) { currentPost ->
+            binding.contentEditText.setText(currentPost?.content)
+        }
     }
 }
 

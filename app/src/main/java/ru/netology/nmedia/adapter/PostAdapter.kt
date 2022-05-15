@@ -26,8 +26,6 @@ internal class PostAdapter(
     }
 
 
-//    override fun getItemCount() = posts.size - не нужно для ListAdapter, только для RecycleView.Adapter
-
     inner class ViewHolder(
         private val binding: PostListItemBinding
     ) : RecyclerView.ViewHolder(binding.root) {
@@ -45,6 +43,10 @@ internal class PostAdapter(
                     when (menuItem.itemId) {
                         R.id.remove -> {
                             interactionListener.onRemoveClick(post)
+                            true
+                        }
+                        R.id.edit -> {
+                            interactionListener.onEditClick(post)
                             true
                         }
                         else -> false
