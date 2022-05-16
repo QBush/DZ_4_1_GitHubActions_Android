@@ -47,6 +47,7 @@ internal class PostAdapter(
                         }
                         R.id.edit -> {
                             interactionListener.onEditClick(post)
+
                             true
                         }
                         else -> false

@@ -39,6 +39,17 @@
         app:layout_constraintTop_toTopOf="@id/toolsTop" />
 
     <ImageButton
+        android:id="@+id/cancelEdit"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:background="@android:color/transparent"
+        android:contentDescription="@string/cancel_edit"
+        app:layout_constraintBottom_toTopOf="@+id/saveButton"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toEndOf="@id/contentEditText"
+        app:srcCompat="@drawable/ic_baseline_close_48" />
+
+    <ImageButton
         android:id="@+id/saveButton"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
