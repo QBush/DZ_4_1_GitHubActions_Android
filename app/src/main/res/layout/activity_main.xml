@@ -38,6 +38,12 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="@id/toolsTop" />
 
+    <androidx.constraintlayout.widget.Group
+        android:id="@+id/editGroup"
+        app:constraint_referenced_ids="cancelEdit,saveButton"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content" />
+
     <ImageButton
         android:id="@+id/cancelEdit"
         android:layout_width="wrap_content"
@@ -60,4 +66,6 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toEndOf="@id/contentEditText"
         app:srcCompat="@drawable/ic_save_48" />
+
+
 </androidx.constraintlayout.widget.ConstraintLayout>

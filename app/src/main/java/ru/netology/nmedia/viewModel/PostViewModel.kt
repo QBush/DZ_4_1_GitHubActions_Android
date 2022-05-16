@@ -19,7 +19,7 @@ class PostViewModel : ViewModel(), PostInteractionListener {
     fun onSaveButtonClick(content: String) {
         if (content.isBlank()) return
         val post = currentPost.value?.copy(
-            content = content // что это?
+            content = content
         ) ?: Post(
             id = PostRepository.NEW_POST_ID,
             author = "me",
@@ -41,7 +41,6 @@ class PostViewModel : ViewModel(), PostInteractionListener {
     override fun onLikeClick(post: Post) = repository.like(post.id)
     override fun onShareClick(post: Post) = repository.share(post.id)
     override fun onRemoveClick(post: Post) = repository.delete(post.id)
-
 
     // endregion PostInteractionListener
 }
