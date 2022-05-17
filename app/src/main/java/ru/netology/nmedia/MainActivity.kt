@@ -2,8 +2,12 @@ package ru.netology.nmedia
 
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import android.text.Editable
+import android.text.TextWatcher
 import android.view.View
+import android.widget.Toast
 import androidx.activity.viewModels
+import androidx.core.widget.addTextChangedListener
 import ru.netology.nmedia.adapter.PostAdapter
 import ru.netology.nmedia.databinding.ActivityMainBinding
 import ru.netology.nmedia.utils.hideKeyBoard
@@ -42,9 +46,8 @@ class MainActivity : AppCompatActivity() {
             binding.contentEditText.hideKeyBoard()
             binding.contentEditText.setText("")
             binding.contentEditText.clearFocus()
+            binding.saveButton.setImageResource(R.drawable.ic_save_48)
         }
-
-        binding.cancelEdit.visibility = View.GONE // крест по умолчанию делаем невидимым
 
 //        binding.contentEditText.observe(this) {
 //            if (binding.contentEditText.text.toString().trim().isEmpty()) {
@@ -60,11 +63,14 @@ class MainActivity : AppCompatActivity() {
             if (content != null) { // когда нажали редактировать, текущий пост принял значение из поста
                 binding.contentEditText.requestFocus()
                 binding.editGroup.visibility = View.VISIBLE
+                binding.previousTextView.text = content
                 binding.contentEditText.showKeyBoard()
+                binding.saveButton.setImageResource(R.drawable.ic_save_48_blue)
             } else { // когда нажали сохранить, текущий пост обнулился
                 binding.contentEditText.clearFocus()
                 binding.contentEditText.hideKeyBoard()
-                binding.cancelEdit.visibility = View.GONE
+                binding.editGroup.visibility = View.GONE
+                binding.saveButton.setImageResource(R.drawable.ic_save_48)
             }
         }
     }
