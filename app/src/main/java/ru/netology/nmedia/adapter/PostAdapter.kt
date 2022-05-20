@@ -33,6 +33,7 @@ internal class PostAdapter(
         init {
             binding.likes.setOnClickListener { interactionListener.onLikeClick(post) }
             binding.share.setOnClickListener { interactionListener.onShareClick(post) }
+            binding.options.setOnClickListener { popupMenu.show() }
         }
         private lateinit var post: Post
 
@@ -62,10 +63,10 @@ internal class PostAdapter(
                 authorName.text = post.author
                 date.text = post.published
                 postText.text = post.content
-                likes.setImageResource(getLikeIconResId(post.likedByMe))
-                likesCount.text = thousandKChanger(post.likeCount)
+                likes.isChecked = post.likedByMe
+                likes.text = thousandKChanger(post.likeCount)
                 sharedCount.text = thousandKChanger(post.shareCount)
-                options.setOnClickListener { popupMenu.show() }
+
             }
         }
 
