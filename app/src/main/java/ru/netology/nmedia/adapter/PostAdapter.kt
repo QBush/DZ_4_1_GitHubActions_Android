@@ -35,6 +35,7 @@ internal class PostAdapter(
             binding.share.setOnClickListener { interactionListener.onShareClick(post) }
             binding.options.setOnClickListener { popupMenu.show() }
         }
+
         private lateinit var post: Post
 
         private val popupMenu by lazy {
@@ -69,7 +70,6 @@ internal class PostAdapter(
 
             }
         }
-
 
         private fun getLikeIconResId(liked: Boolean) =
             if (liked) R.drawable.ic_liked_24 else R.drawable.ic_like_24

@@ -12,4 +12,5 @@
     <string name="description_post_share">Поделиться</string>
     <string name="description_post_save">Сохранить</string>
     <string name="cancel_edit">Отмена редактирования</string>
+    <string name="new_post_hint">Начните писать...</string>
 </resources>

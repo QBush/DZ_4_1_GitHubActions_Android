@@ -62,15 +62,31 @@
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_marginTop="@dimen/common_spacing"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@id/headerBarrier"
-        tools:text="@string/post_text" />
+        tools:text="@tools:sample/lorem/random" />
 
-    <com.google.android.material.checkbox.MaterialCheckBox
+    <!--com.google.android.material.checkbox.MaterialCheckBox
+    android:id="@+id/like"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    android:contentDescription="@string/description_post_like"
+    app:layout_constraintStart_toStartOf="parent"
+    app:layout_constraintTop_toBottomOf="@id/footer"
+    android:button="@drawable/ic_like_24dp"
+    tools:checked="@sample/posts.json/data/likedByMe"
+    tools:text="@sample/posts.json/data/likes"
+    style="@style/Widget.AppTheme.LikeCheckBox"/-->
+
+    <com.google.android.material.button.MaterialButton
         android:id="@+id/likes"
-        style="@style/Widget.AppTheme.LikeCheckbox"
+        style="@style/Widget.AppTheme.LikeButton"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:contentDescription="@string/post_text"
+        android:checkable="true"
+        android:contentDescription="@string/description_post_like"
+        app:icon="@drawable/ic_like_24new"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@id/postText"
         tools:button="@drawable/ic_like_24"
