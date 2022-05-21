@@ -22,6 +22,7 @@
 
     <style name="Widget.AppTheme.LikeButton" parent="Widget.MaterialComponents.Button.TextButton.Icon">
         <item name="iconTint">@color/like_checkbox_tint</item>
+        <item name="icon">@drawable/ic_like_24new</item>
         <item name="android:minWidth">@dimen/icon_button_min_size</item>
         <item name="android:minHeight">@dimen/icon_button_min_size</item>
     </style>
