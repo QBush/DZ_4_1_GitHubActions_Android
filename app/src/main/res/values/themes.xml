@@ -12,18 +12,30 @@
         <!-- Status bar color. -->
         <item name="android:statusBarColor" tools:targetApi="l">?attr/colorPrimaryVariant</item>
         <!-- Customize your theme here. -->
-
     </style>
+
 
     <style name="Widget.AppTheme.LikeCheckBox" parent="Widget.MaterialComponents.CompoundButton.CheckBox">
         <item name="buttonTint">@color/like_checkbox_tint</item>
         <item name="android:paddingStart">@dimen/icon_button_padding</item>
     </style>
 
+
     <style name="Widget.AppTheme.LikeButton" parent="Widget.MaterialComponents.Button.TextButton.Icon">
         <item name="iconTint">@color/like_checkbox_tint</item>
-        <item name="icon">@drawable/ic_like_24new</item>
-        <item name="android:minWidth">@dimen/icon_button_min_size</item>
+        <item name="icon">@drawable/ic_like_24dp</item>
+        <item name="android:width">@dimen/icon_button_max_size</item>
         <item name="android:minHeight">@dimen/icon_button_min_size</item>
     </style>
+
+
+    <style name="Widget.AppTheme.ShareButton" parent="Widget.MaterialComponents.Button.TextButton.Icon" >
+        <item name="icon">@drawable/ic_share_24dp</item>
+        <item name="iconTint">?attr/colorControlNormal</item>
+        <item name="android:textColor">?attr/colorControlNormal</item>
+        <item name="android:width">@dimen/icon_button_max_size</item>
+        <item name="android:minHeight">@dimen/icon_button_min_size</item>
+    </style>
+
+
 </resources>

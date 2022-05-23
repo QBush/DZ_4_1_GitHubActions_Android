@@ -49,7 +49,6 @@ internal class PostAdapter(
                         }
                         R.id.edit -> {
                             interactionListener.onEditClick(post)
-
                             true
                         }
                         else -> false
@@ -66,13 +65,12 @@ internal class PostAdapter(
                 postText.text = post.content
                 likes.isChecked = post.likedByMe
                 likes.text = thousandKChanger(post.likeCount)
-                sharedCount.text = thousandKChanger(post.shareCount)
-
+                share.text = thousandKChanger(post.shareCount)
             }
         }
 
-        private fun getLikeIconResId(liked: Boolean) =
-            if (liked) R.drawable.ic_liked_24 else R.drawable.ic_like_24
+//        private fun getLikeIconResId(liked: Boolean) =
+//            if (liked) R.drawable.ic_liked_24 else R.drawable.ic_like_24
     }
 
     private fun thousandKChanger(number: Long): String =
