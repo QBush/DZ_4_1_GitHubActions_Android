@@ -20,7 +20,6 @@ class MainActivity : AppCompatActivity() {
 
     private val viewModel by viewModels<PostViewModel>()
 
-
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         val binding = ActivityMainBinding.inflate(layoutInflater)
@@ -32,8 +31,6 @@ class MainActivity : AppCompatActivity() {
         viewModel.data.observe(this) {
             adapter.submitList(it)
         }
-
-
 
         binding.saveButton.setOnClickListener {
             with(binding.contentEditText) {
@@ -86,6 +83,8 @@ class MainActivity : AppCompatActivity() {
             )
             startActivity(shareIntent)
         }
+
+
     }
 }
 
