@@ -16,4 +16,6 @@
     <string name="cancel_edit">Cancel edit</string>
     <string name="new_post_hint">Start to write...</string>
     <string name="chooser_share_post">Share post</string>
+    <string name="add_post">Add post</string>
+    <string name="save">Save</string>
 </resources>
