@@ -9,8 +9,8 @@ import com.google.android.material.snackbar.Snackbar
 import ru.netology.nmedia.databinding.IntentHandlerActivityBinding
 
 class IntentHandLerActivity : AppCompatActivity() {
-    override fun onPostCreate(savedInstanceState: Bundle?) {
-        super.onPostCreate(savedInstanceState)
+    override fun onCreate(savedInstanceState: Bundle?) {
+        super.onCreate(savedInstanceState)
 
         val binding = IntentHandlerActivityBinding.inflate(layoutInflater)
         setContentView(binding.root)
