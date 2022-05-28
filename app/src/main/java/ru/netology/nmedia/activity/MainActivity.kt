@@ -4,6 +4,7 @@ import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.view.View
+import androidx.activity.result.launch
 import androidx.activity.viewModels
 import ru.netology.nmedia.R
 import ru.netology.nmedia.adapter.PostAdapter
@@ -29,20 +30,17 @@ class MainActivity : AppCompatActivity() {
             adapter.submitList(it)
         }
 
-        binding.saveButton.setOnClickListener {
-            with(binding.contentEditText) {
-                val content = text.toString()
-                viewModel.onSaveButtonClick(content)
-            }
+        binding.fab.setOnClickListener {
+            viewModel.onAddClicked()
         }
 
-        binding.cancelEdit.setOnClickListener { // когда нажимем на крестик
-            binding.cancelEdit.visibility = View.GONE
-            binding.contentEditText.hideKeyBoard()
-            binding.contentEditText.setText("")
-            binding.contentEditText.clearFocus()
-            binding.saveButton.setImageResource(R.drawable.ic_save_48)
-        }
+//        binding.cancelEdit.setOnClickListener { // когда нажимем на крестик
+//            binding.cancelEdit.visibility = View.GONE
+//            binding.contentEditText.hideKeyBoard()
+//            binding.contentEditText.setText("")
+//            binding.contentEditText.clearFocus()
+//            binding.saveButton.setImageResource(R.drawable.ic_save_48)
+//        }
 
 //        binding.contentEditText.observe(this) {
 //            if (binding.contentEditText.text.toString().trim().isEmpty()) {
@@ -51,23 +49,6 @@ class MainActivity : AppCompatActivity() {
 //                binding.editGroup.visibility = View.VISIBLE
 //            }
 //        }
-
-        viewModel.currentPost.observe(this) { currentPost ->
-            val content = currentPost?.content
-            binding.contentEditText.setText(content)
-            if (content != null) { // когда нажали редактировать, текущий пост принял значение из поста
-                binding.contentEditText.requestFocus()
-                binding.editGroup.visibility = View.VISIBLE
-                binding.previousTextView.text = content
-                binding.contentEditText.showKeyBoard()
-                binding.saveButton.setImageResource(R.drawable.ic_save_48_blue)
-            } else { // когда нажали сохранить, текущий пост обнулился
-                binding.contentEditText.clearFocus()
-                binding.contentEditText.hideKeyBoard()
-                binding.editGroup.visibility = View.GONE
-                binding.saveButton.setImageResource(R.drawable.ic_save_48)
-            }
-        }
 
         viewModel.sharePostContent.observe(this) { postContent ->
             val intent = Intent().apply {
@@ -78,9 +59,19 @@ class MainActivity : AppCompatActivity() {
             val shareIntent = Intent.createChooser(
                 intent, getString(R.string.chooser_share_post)
             )
-            startActivity(shareIntent)
+            startActivity(shareIntent) // отдаем неявный интент наружу
         }
 
+        val postContentActivityLauncher = registerForActivityResult(
+            PostContentActivity.ResultContract
+        ) {postContent -> // вызывается после parseResult из контракта
+            postContent ?: return@registerForActivityResult
+            viewModel.onSaveButtonClick(postContent)
+        }
+
+        viewModel.navigateToPostContentScreenEvent.observe(this) {
+            postContentActivityLauncher.launch()
+        }
 
     }
 }

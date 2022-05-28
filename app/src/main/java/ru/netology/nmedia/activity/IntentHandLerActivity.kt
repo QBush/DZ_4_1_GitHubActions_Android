@@ -8,7 +8,7 @@ import com.google.android.material.snackbar.BaseTransientBottomBar.LENGTH_INDEFI
 import com.google.android.material.snackbar.Snackbar
 import ru.netology.nmedia.databinding.IntentHandlerActivityBinding
 
-class IntentHandLerActivity : AppCompatActivity() {
+class IntentHandLerActivity : AppCompatActivity() { // класс для приема внешних интентов из других программ
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
 
@@ -23,8 +23,8 @@ class IntentHandLerActivity : AppCompatActivity() {
 
         if (text.isNullOrBlank()) return
 
-        Snackbar.make(binding.root, text, Snackbar.LENGTH_INDEFINITE)
-            .setAction(android.R.string.ok) { finish() }
+        Snackbar.make(binding.root, text, Snackbar.LENGTH_INDEFINITE) // выводим SnackBar с действием
+            .setAction(android.R.string.ok) { finish() } // по нажатии "ОК" выходим из программы
             .show()
     }
 }

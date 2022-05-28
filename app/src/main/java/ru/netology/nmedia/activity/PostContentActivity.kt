@@ -30,7 +30,8 @@ class PostContentActivity : AppCompatActivity() {
             finish()
         }
     }
-    class ResultContract : ActivityResultContract<Unit, String?>(){
+
+    object ResultContract : ActivityResultContract<Unit, String?>(){
         override fun createIntent(context: Context, input: Unit): Intent =
             Intent(context, PostContentActivity::class.java)
 
