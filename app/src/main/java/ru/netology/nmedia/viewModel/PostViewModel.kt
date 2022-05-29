@@ -14,7 +14,7 @@ class PostViewModel : ViewModel(), PostInteractionListener {
     val data by repository::data
 
     val sharePostContent = SingleLiveEvent<String>()
-    val navigateToPostContentScreenEvent = SingleLiveEvent<Unit>()
+    val navigateToPostContentScreenEvent = SingleLiveEvent<String?>()
 
     val currentPost = MutableLiveData<Post?>(null)
 
@@ -35,8 +35,8 @@ class PostViewModel : ViewModel(), PostInteractionListener {
     }
 
     override fun onEditClick(post: Post) {
-
         currentPost.value = post
+        navigateToPostContentScreenEvent.value = post.content
     }
 
     //endregion MenuInteractionListener

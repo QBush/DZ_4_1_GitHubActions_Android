@@ -17,9 +17,12 @@ class PostContentActivity : AppCompatActivity() {
         val binding = PostContentActivityBinding.inflate(layoutInflater)
         setContentView(binding.root)
 
+        val intent = intent
+        val text = intent.getStringExtra(Intent.EXTRA_TEXT)
+        binding.edit.setText(text)
+
         binding.edit.requestFocus()
         binding.ok.setOnClickListener {
-            val intent = Intent()
             if (binding.edit.text.isNullOrBlank()) {
                 setResult(Activity.RESULT_CANCELED, intent)
             } else {
@@ -31,9 +34,10 @@ class PostContentActivity : AppCompatActivity() {
         }
     }
 
-    object ResultContract : ActivityResultContract<Unit, String?>(){
-        override fun createIntent(context: Context, input: Unit): Intent =
-            Intent(context, PostContentActivity::class.java)
+    object ResultContract : ActivityResultContract<String?, String?>(){
+        override fun createIntent(context: Context, input: String?): Intent =
+            Intent(context, PostContentActivity::class.java).putExtra(Intent.EXTRA_TEXT, input)
+
 
         override fun parseResult(resultCode: Int, intent: Intent?): String? =
             if (resultCode == Activity.RESULT_OK) {
@@ -41,7 +45,9 @@ class PostContentActivity : AppCompatActivity() {
             } else null
     }
 
+
+
     private companion object {
-        private const val RESULT_KEY = "PostNewContent"
+        private const val RESULT_KEY = "PostContent"
     }
 }

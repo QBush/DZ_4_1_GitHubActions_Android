@@ -70,9 +70,9 @@ class MainActivity : AppCompatActivity() {
         }
 
         viewModel.navigateToPostContentScreenEvent.observe(this) {
-            postContentActivityLauncher.launch()
+            if (it.isNullOrBlank()) postContentActivityLauncher.launch("")
+            postContentActivityLauncher.launch(it)
         }
-
     }
 }
 
