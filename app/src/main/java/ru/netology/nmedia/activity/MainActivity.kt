@@ -3,14 +3,10 @@ package ru.netology.nmedia.activity
 import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
-import android.view.View
-import androidx.activity.result.launch
 import androidx.activity.viewModels
 import ru.netology.nmedia.R
 import ru.netology.nmedia.adapter.PostAdapter
 import ru.netology.nmedia.databinding.ActivityMainBinding
-import ru.netology.nmedia.utils.hideKeyBoard
-import ru.netology.nmedia.utils.showKeyBoard
 import ru.netology.nmedia.viewModel.PostViewModel
 
 
@@ -62,16 +58,27 @@ class MainActivity : AppCompatActivity() {
             startActivity(shareIntent) // отдаем неявный интент наружу
         }
 
-        val postContentActivityLauncher = registerForActivityResult(
-            PostContentActivity.ResultContract
+//        val postContentActivityLauncher = registerForActivityResult(
+//            PostContentActivity.ResultContract
+//        ) {postContent -> // вызывается после parseResult из контракта
+//            postContent ?: return@registerForActivityResult
+//            viewModel.onSaveButtonClick(postContent)
+//        }
+//
+//        viewModel.navigateToPostContentScreenEvent.observe(this) {
+//            if (it.isNullOrBlank()) postContentActivityLauncher.launch("")
+//            postContentActivityLauncher.launch(it)
+//        }
+
+        val postContentActivityLauncherWithUrl = registerForActivityResult(
+            PostContentActivity.ResultContractWithUrl
         ) {postContent -> // вызывается после parseResult из контракта
             postContent ?: return@registerForActivityResult
-            viewModel.onSaveButtonClick(postContent)
+            viewModel.onSaveButtonClick(postContent.content!!)
         }
 
-        viewModel.navigateToPostContentScreenEvent.observe(this) {
-            if (it.isNullOrBlank()) postContentActivityLauncher.launch("")
-            postContentActivityLauncher.launch(it)
+        viewModel.navigateToPostContentScreenEventWithUrl.observe(this) {
+            postContentActivityLauncherWithUrl.launch(it)
         }
     }
 }

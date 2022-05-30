@@ -3,6 +3,7 @@ package ru.netology.nmedia.viewModel
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import ru.netology.nmedia.Post
+import ru.netology.nmedia.PostEditableContent
 import ru.netology.nmedia.adapter.PostInteractionListener
 import ru.netology.nmedia.data.PostRepository
 import ru.netology.nmedia.data.impl.InMemoryPostRepository
@@ -14,13 +15,14 @@ class PostViewModel : ViewModel(), PostInteractionListener {
     val data by repository::data
 
     val sharePostContent = SingleLiveEvent<String>()
-    val navigateToPostContentScreenEvent = SingleLiveEvent<String?>()
+    val navigateToPostContentScreenEventWithUrl = SingleLiveEvent<PostEditableContent?>()
+//    val navigateToPostContentScreenEvent = SingleLiveEvent<String?>()
 
     val currentPost = MutableLiveData<Post?>(null)
 
     //region MenuInteractionListener
 
-    fun onSaveButtonClick(content: String) {
+    fun onSaveButtonClick(content: String, videoUrl: String? = null) {
         if (content.isBlank()) return
         val post = currentPost.value?.copy(
             content = content
@@ -36,13 +38,13 @@ class PostViewModel : ViewModel(), PostInteractionListener {
 
     override fun onEditClick(post: Post) {
         currentPost.value = post
-        navigateToPostContentScreenEvent.value = post.content
+        navigateToPostContentScreenEventWithUrl.value = PostEditableContent(post.content, post.videoUrl)
     }
 
     //endregion MenuInteractionListener
 
     fun onAddClicked() {
-        navigateToPostContentScreenEvent.call() // устанавливаем null значение
+        navigateToPostContentScreenEventWithUrl.call()
     }
 
     //region PostInteractionListener
