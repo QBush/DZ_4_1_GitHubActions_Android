@@ -30,6 +30,9 @@ class MainActivity : AppCompatActivity() {
             viewModel.onAddClicked()
         }
 
+
+
+
 //        binding.cancelEdit.setOnClickListener { // когда нажимем на крестик
 //            binding.cancelEdit.visibility = View.GONE
 //            binding.contentEditText.hideKeyBoard()
@@ -74,7 +77,7 @@ class MainActivity : AppCompatActivity() {
             PostContentActivity.ResultContractWithUrl
         ) {postContent -> // вызывается после parseResult из контракта
             postContent ?: return@registerForActivityResult
-            viewModel.onSaveButtonClick(postContent.content!!)
+            viewModel.onSaveButtonClick(postContent.content!!, postContent.videoUrl)
         }
 
         viewModel.navigateToPostContentScreenEventWithUrl.observe(this) {

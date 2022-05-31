@@ -36,6 +36,7 @@ class PostContentActivity : AppCompatActivity() {
             }
             finish()
         }
+
     }
 
 //    object ResultContract : ActivityResultContract<String?, String?>(){

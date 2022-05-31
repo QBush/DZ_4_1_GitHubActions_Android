@@ -25,12 +25,13 @@ class PostViewModel : ViewModel(), PostInteractionListener {
     fun onSaveButtonClick(content: String, videoUrl: String? = null) {
         if (content.isBlank()) return
         val post = currentPost.value?.copy(
-            content = content
+            content = content, videoUrl = videoUrl
         ) ?: Post(
             id = PostRepository.NEW_POST_ID,
             author = "me",
             content = content,
-            published = "12.05.2022"
+            published = "12.05.2022",
+            videoUrl = videoUrl
         )
         repository.save(post)
         currentPost.value = null
@@ -40,6 +41,8 @@ class PostViewModel : ViewModel(), PostInteractionListener {
         currentPost.value = post
         navigateToPostContentScreenEventWithUrl.value = PostEditableContent(post.content, post.videoUrl)
     }
+
+
 
     //endregion MenuInteractionListener
 
@@ -55,6 +58,10 @@ class PostViewModel : ViewModel(), PostInteractionListener {
         repository.share(post.id)
     }
     override fun onRemoveClick(post: Post) = repository.delete(post.id)
+
+    override fun onVideoClick(post: Post) {
+        repository.playVideo(post)
+    }
 
 
 

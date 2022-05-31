@@ -1,5 +1,8 @@
 package ru.netology.nmedia.data.impl
 
+import android.content.Intent
+import android.net.Uri
+import androidx.core.content.ContextCompat.startActivity
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import ru.netology.nmedia.Post
@@ -67,5 +70,11 @@ class InMemoryPostRepository : PostRepository {
             if (it.id == post.id) post else it
         }
     }
+
+    override fun playVideo(post: Post) {
+        Intent(Intent.ACTION_VIEW, Uri.parse(post.videoUrl))
+
+    }
+
 }
 

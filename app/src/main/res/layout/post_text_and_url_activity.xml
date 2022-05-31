@@ -9,7 +9,7 @@
     <EditText
         android:id="@+id/edit"
         android:layout_width="match_parent"
-        android:layout_height="0dp"
+        android:layout_height="wrap_content"
         android:background="@android:color/transparent"
         android:gravity="start|top"
         android:hint="@string/new_post_hint"
@@ -17,13 +17,6 @@
         android:inputType="textMultiLine"
         android:text="@string/post_text"
         />
-
-    <androidx.constraintlayout.widget.Barrier
-        android:id="@+id/barrier"
-        android:layout_width="0dp"
-        android:layout_height="0dp"
-        app:barrierDirection="top"
-        app:constraint_referenced_ids="videoUrl" />
 
     <EditText
         android:id="@+id/videoUrl"
@@ -34,7 +27,7 @@
         android:hint="@string/video_url"
         android:singleLine="true"
         app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/barrier"
+        app:layout_constraintTop_toBottomOf="@+id/edit"
  />
 
 
