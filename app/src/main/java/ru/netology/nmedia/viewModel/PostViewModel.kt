@@ -16,6 +16,7 @@ class PostViewModel : ViewModel(), PostInteractionListener {
 
     val sharePostContent = SingleLiveEvent<String>()
     val navigateToPostContentScreenEventWithUrl = SingleLiveEvent<PostEditableContent?>()
+    val playVideoEventFromExternalActivity = SingleLiveEvent<String?>()
 //    val navigateToPostContentScreenEvent = SingleLiveEvent<String?>()
 
     val currentPost = MutableLiveData<Post?>(null)
@@ -60,7 +61,7 @@ class PostViewModel : ViewModel(), PostInteractionListener {
     override fun onRemoveClick(post: Post) = repository.delete(post.id)
 
     override fun onVideoClick(post: Post) {
-        repository.playVideo(post)
+        playVideoEventFromExternalActivity.value = post.videoUrl
     }
 
 

@@ -4,9 +4,11 @@ package ru.netology.nmedia.activity
 import android.app.Activity
 import android.content.Context
 import android.content.Intent
+import android.net.Uri
 import android.os.Bundle
 import androidx.activity.result.contract.ActivityResultContract
 import androidx.appcompat.app.AppCompatActivity
+import androidx.core.content.ContextCompat
 import ru.netology.nmedia.PostEditableContent
 import ru.netology.nmedia.databinding.PostContentActivityBinding
 
@@ -19,10 +21,9 @@ class PostContentActivity : AppCompatActivity() {
 
         val intent = intent
         var text = intent.getStringExtra(CONTENT_KEY)
-        var url = intent.getStringExtra(URL_KEY)
+        lateinit var url : String
         binding.postTextAndUrlActivity.edit.setText(text)
 
-// где-то здесь нужно вставить отображение ссылки
         binding.postTextAndUrlActivity.edit.requestFocus()
         binding.ok.setOnClickListener {
             if (binding.postTextAndUrlActivity.edit.text.isNullOrBlank()) {
@@ -36,7 +37,6 @@ class PostContentActivity : AppCompatActivity() {
             }
             finish()
         }
-
     }
 
 //    object ResultContract : ActivityResultContract<String?, String?>(){

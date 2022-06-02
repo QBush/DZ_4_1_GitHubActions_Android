@@ -1,9 +1,11 @@
 package ru.netology.nmedia.activity
 
 import android.content.Intent
+import android.net.Uri
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import androidx.activity.viewModels
+import androidx.core.content.ContextCompat
 import ru.netology.nmedia.R
 import ru.netology.nmedia.adapter.PostAdapter
 import ru.netology.nmedia.databinding.ActivityMainBinding
@@ -30,25 +32,6 @@ class MainActivity : AppCompatActivity() {
             viewModel.onAddClicked()
         }
 
-
-
-
-//        binding.cancelEdit.setOnClickListener { // когда нажимем на крестик
-//            binding.cancelEdit.visibility = View.GONE
-//            binding.contentEditText.hideKeyBoard()
-//            binding.contentEditText.setText("")
-//            binding.contentEditText.clearFocus()
-//            binding.saveButton.setImageResource(R.drawable.ic_save_48)
-//        }
-
-//        binding.contentEditText.observe(this) {
-//            if (binding.contentEditText.text.toString().trim().isEmpty()) {
-//                binding.editGroup.visibility = View.GONE
-//            } else {
-//                binding.editGroup.visibility = View.VISIBLE
-//            }
-//        }
-
         viewModel.sharePostContent.observe(this) { postContent ->
             val intent = Intent().apply {
                 action = Intent.ACTION_SEND
@@ -61,27 +44,20 @@ class MainActivity : AppCompatActivity() {
             startActivity(shareIntent) // отдаем неявный интент наружу
         }
 
-//        val postContentActivityLauncher = registerForActivityResult(
-//            PostContentActivity.ResultContract
-//        ) {postContent -> // вызывается после parseResult из контракта
-//            postContent ?: return@registerForActivityResult
-//            viewModel.onSaveButtonClick(postContent)
-//        }
-//
-//        viewModel.navigateToPostContentScreenEvent.observe(this) {
-//            if (it.isNullOrBlank()) postContentActivityLauncher.launch("")
-//            postContentActivityLauncher.launch(it)
-//        }
-
         val postContentActivityLauncherWithUrl = registerForActivityResult(
             PostContentActivity.ResultContractWithUrl
-        ) {postContent -> // вызывается после parseResult из контракта
+        ) { postContent -> // вызывается после parseResult из контракта
             postContent ?: return@registerForActivityResult
             viewModel.onSaveButtonClick(postContent.content!!, postContent.videoUrl)
         }
 
         viewModel.navigateToPostContentScreenEventWithUrl.observe(this) {
             postContentActivityLauncherWithUrl.launch(it)
+        }
+
+        viewModel.playVideoEventFromExternalActivity.observe(this) {
+            val intent = Intent(Intent.ACTION_VIEW, Uri.parse(it))
+            startActivity(intent)
         }
     }
 }

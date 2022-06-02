@@ -7,6 +7,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.PopupMenu
+import androidx.core.content.ContextCompat
 import androidx.core.content.ContextCompat.startActivity
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.ListAdapter
@@ -38,12 +39,12 @@ internal class PostAdapter(
             binding.likes.setOnClickListener { interactionListener.onLikeClick(post) }
             binding.share.setOnClickListener { interactionListener.onShareClick(post) }
             binding.options.setOnClickListener { popupMenu.show() }
-            binding.video.background.setOnClickListener {
-              val intent = Intent(Intent.ACTION_VIEW, Uri.parse(post.videoUrl))
-                startActivity(intent)
-            }
-            binding.video.playVideoButton.setOnClickListener {}
 
+            /* TODO Возможно, нужно сделать активити поста, которую запускать через Интент при нажатии
+TODO Разобраться еще раз с процессом запуска рейсайкл вью */
+            binding.video.background.setOnClickListener {
+                interactionListener.onVideoClick(post)
+            }
         }
 
         private lateinit var post: Post
@@ -77,14 +78,10 @@ internal class PostAdapter(
                 likes.text = thousandKChanger(post.likeCount)
                 share.text = thousandKChanger(post.shareCount)
                 if (post.videoUrl != null) {
-                    video.background.visibility = View.VISIBLE
-                    video.playVideoButton.visibility = View.VISIBLE
+                    video.root.visibility = View.VISIBLE
                 }
             }
         }
-
-//        private fun getLikeIconResId(liked: Boolean) =
-//            if (liked) R.drawable.ic_liked_24 else R.drawable.ic_like_24
     }
 
     private fun thousandKChanger(number: Long): String =

@@ -70,11 +70,5 @@ class InMemoryPostRepository : PostRepository {
             if (it.id == post.id) post else it
         }
     }
-
-    override fun playVideo(post: Post) {
-        Intent(Intent.ACTION_VIEW, Uri.parse(post.videoUrl))
-
-    }
-
 }
 

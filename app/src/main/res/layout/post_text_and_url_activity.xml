@@ -13,10 +13,9 @@
         android:background="@android:color/transparent"
         android:gravity="start|top"
         android:hint="@string/new_post_hint"
-        app:layout_constraintTop_toTopOf="parent"
         android:inputType="textMultiLine"
         android:text="@string/post_text"
-        />
+        app:layout_constraintTop_toTopOf="parent" />
 
     <EditText
         android:id="@+id/videoUrl"
@@ -25,10 +24,9 @@
         android:layout_marginTop="@dimen/common_spacing"
         android:background="@android:color/transparent"
         android:hint="@string/video_url"
-        android:singleLine="true"
+        android:inputType="textMultiLine"
         app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/edit"
- />
+        app:layout_constraintTop_toBottomOf="@+id/edit" />
 
 
 </androidx.constraintlayout.widget.ConstraintLayout>
