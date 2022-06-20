@@ -1,11 +1,14 @@
 package ru.netology.nmedia.activity
 
+import android.content.Context
 import android.content.Intent
 import android.net.Uri
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import androidx.activity.viewModels
 import androidx.core.content.ContextCompat
+import androidx.core.content.edit
+import com.google.android.material.snackbar.Snackbar
 import ru.netology.nmedia.R
 import ru.netology.nmedia.adapter.PostAdapter
 import ru.netology.nmedia.databinding.ActivityMainBinding
@@ -20,6 +23,21 @@ class MainActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         val binding = ActivityMainBinding.inflate(layoutInflater)
         setContentView(binding.root)
+
+//        run { // кладем в преференс при запуске приложения
+//            val preferences = getPreferences(Context.MODE_PRIVATE)
+//            preferences.edit {
+//                putString("key", "value")
+//            }
+//        }
+//
+//        run { // читаем из референсе при запуске приложения
+//            val preferences = getPreferences(Context.MODE_PRIVATE)
+//            val value = preferences.getString("key","noValue") ?: return@run
+//            Snackbar.make(binding.root, value, Snackbar.LENGTH_INDEFINITE).show()
+//        }
+
+
 
         val adapter = PostAdapter(viewModel)
         binding.PostsRecycleView.adapter = adapter
@@ -52,7 +70,7 @@ class MainActivity : AppCompatActivity() {
         }
 
         viewModel.navigateToPostContentScreenEventWithUrl.observe(this) {
-            postContentActivityLauncherWithUrl.launch(it)
+            postContentActivityLauncherWithUrl.launch(it) // it - входящий в параметре контракта
         }
 
         viewModel.playVideoEventFromExternalActivity.observe(this) {
