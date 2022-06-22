@@ -21,8 +21,10 @@ class PostContentActivity : AppCompatActivity() {
 
         val intent = intent
         var text = intent.getStringExtra(CONTENT_KEY)
-        lateinit var url : String
+        var url = intent.getStringExtra(URL_KEY)
         binding.postTextAndUrlActivity.edit.setText(text)
+        binding.postTextAndUrlActivity.videoUrl.setText(url)
+
 
         binding.postTextAndUrlActivity.edit.requestFocus()
         binding.ok.setOnClickListener {
