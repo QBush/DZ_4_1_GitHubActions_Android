@@ -77,7 +77,7 @@ TODO Разобраться еще раз с процессом запуска �
                 likes.isChecked = post.likedByMe
                 likes.text = thousandKChanger(post.likeCount)
                 share.text = thousandKChanger(post.shareCount)
-                if (post.videoUrl != null) {
+                if (post.videoUrl?.isNotBlank() == true) {
                     video.root.visibility = View.VISIBLE
                 }
             }

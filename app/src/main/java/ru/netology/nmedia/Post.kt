@@ -1,8 +1,10 @@
 package ru.netology.nmedia
 
 import androidx.lifecycle.MutableLiveData
+import kotlinx.serialization.Serializable
 import java.net.HttpURLConnection
 
+@Serializable
 data class Post(
     val id: Long,
     val author: String,
