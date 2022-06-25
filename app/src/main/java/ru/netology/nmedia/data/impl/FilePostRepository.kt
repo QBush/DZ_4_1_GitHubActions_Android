@@ -23,6 +23,7 @@ class FilePostRepository( // через Буфферизованные пото�
 
     private val gson = Gson()
     private val type = TypeToken.getParameterized(List::class.java, Post::class.java).type
+    private val typeID = TypeToken.getParameterized(Long::class.java).type
 
 
     private val prefs = application.getSharedPreferences(
@@ -37,12 +38,32 @@ class FilePostRepository( // через Буфферизованные пото�
         prefs.edit { putLong(NEXT_ID_PREFS_KEY, newValue) }
     }
 
+//    private var nextID: Long
+//    init {
+//        val idFile = application.filesDir.resolve(FILE_NAME2)
+//        val id: Long = if (idFile.exists()) {
+//            val inputStream = application.openFileInput(FILE_NAME2)
+//            val reader = inputStream.bufferedReader()
+//            reader.use {
+//                gson.fromJson(it, typeID)
+//            }
+//        } else 0L
+//        nextID = id
+//    }
+//
+//    private fun syncID(currentId: Long) {
+//        application.openFileOutput(FILE_NAME2, Context.MODE_PRIVATE).bufferedWriter().use {
+//            it.write(gson.toJson(currentId))
+//        }
+//    }
 
     private companion object {
         const val NEXT_ID_PREFS_KEY = "id"
         const val FILE_NAME = "posts.json"
+        const val FILE_NAME2 = "postsID.json"
 
     }
+
 
     private var posts // значение data.value, проверенное на null
         get() = checkNotNull(data.value) {
@@ -57,17 +78,15 @@ class FilePostRepository( // через Буфферизованные пото�
         }
 
     override val data: MutableLiveData<List<Post>>
-
     init { // читаем с потока при старте
         val postsFile = application.filesDir.resolve(FILE_NAME)
-        val posts :List<Post> = if (postsFile.exists())  {
+        val posts: List<Post> = if (postsFile.exists()) {
             val inputStream = application.openFileInput(FILE_NAME)
             val reader = inputStream.bufferedReader()
             reader.use {
-               gson.fromJson(it, type)
+                gson.fromJson(it, type)
             }
         } else emptyList()
-
         data = MutableLiveData(posts)
     }
 
@@ -102,6 +121,7 @@ class FilePostRepository( // через Буфферизованные пото�
 
     private fun insert(post: Post) {
         posts = listOf(post.copy(id = ++nextID)) + posts
+//        syncID(nextID)
     }
 
     private fun update(post: Post) {
@@ -109,6 +129,7 @@ class FilePostRepository( // через Буфферизованные пото�
             if (it.id == post.id) post else it
         }
     }
-
 }
+
+
 
