@@ -26,36 +26,36 @@ class FilePostRepository( // через Буфферизованные пото�
     private val typeID = TypeToken.getParameterized(Long::class.java).type
 
 
-    private val prefs = application.getSharedPreferences(
-        "repo", Context.MODE_PRIVATE
-    )
+//    private val prefs = application.getSharedPreferences(
+//        "repo", Context.MODE_PRIVATE
+//    )
+//
+//    private var nextID: Long by Delegates.observable(
+//        // это все, чтобы сохранялся ID постов при перезапуске в префах
+//        // после этой операции в префах по другому ключу сохранилось новое значение ID
+//        prefs.getLong(NEXT_ID_PREFS_KEY, 0L)
+//    ) { _, _, newValue ->
+//        prefs.edit { putLong(NEXT_ID_PREFS_KEY, newValue) }
+//    }
 
-    private var nextID: Long by Delegates.observable(
-        // это все, чтобы сохранялся ID постов при перезапуске в префах
-        // после этой операции в префах по другому ключу сохранилось новое значение ID
-        prefs.getLong(NEXT_ID_PREFS_KEY, 0L)
-    ) { _, _, newValue ->
-        prefs.edit { putLong(NEXT_ID_PREFS_KEY, newValue) }
+    private var nextID: Long
+    init {
+        val idFile = application.filesDir.resolve(FILE_NAME2)
+        val id: Long = if (idFile.exists()) {
+            val inputStream = application.openFileInput(FILE_NAME2)
+            val reader = inputStream.bufferedReader()
+            reader.use {
+                gson.fromJson(it, typeID)
+            }
+        } else 0L
+        nextID = id
     }
 
-//    private var nextID: Long
-//    init {
-//        val idFile = application.filesDir.resolve(FILE_NAME2)
-//        val id: Long = if (idFile.exists()) {
-//            val inputStream = application.openFileInput(FILE_NAME2)
-//            val reader = inputStream.bufferedReader()
-//            reader.use {
-//                gson.fromJson(it, typeID)
-//            }
-//        } else 0L
-//        nextID = id
-//    }
-//
-//    private fun syncID(currentId: Long) {
-//        application.openFileOutput(FILE_NAME2, Context.MODE_PRIVATE).bufferedWriter().use {
-//            it.write(gson.toJson(currentId))
-//        }
-//    }
+    private fun syncID(currentId: Long) {
+        application.openFileOutput(FILE_NAME2, Context.MODE_PRIVATE).bufferedWriter().use {
+            it.write(gson.toJson(currentId))
+        }
+    }
 
     private companion object {
         const val NEXT_ID_PREFS_KEY = "id"
@@ -121,7 +121,7 @@ class FilePostRepository( // через Буфферизованные пото�
 
     private fun insert(post: Post) {
         posts = listOf(post.copy(id = ++nextID)) + posts
-//        syncID(nextID)
+        syncID(nextID)
     }
 
     private fun update(post: Post) {
