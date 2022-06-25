@@ -3,6 +3,35 @@
   <component name="DesignSurface">
     <option name="filePathToZoomLevelMap">
       <map>
+        <entry key="..\:/JAVA_Projects/Android_DZ/1_first_DZ/app/src/main/res/drawable/ic_add_24dp.xml" value="0.1495" />
+        <entry key="..\:/JAVA_Projects/Android_DZ/1_first_DZ/app/src/main/res/drawable/ic_baseline_close_48.xml" value="0.141" />
+        <entry key="..\:/JAVA_Projects/Android_DZ/1_first_DZ/app/src/main/res/drawable/ic_baseline_favorite_border_24.xml" value="0.155" />
+        <entry key="..\:/JAVA_Projects/Android_DZ/1_first_DZ/app/src/main/res/drawable/ic_baseline_remove_red_eye_24.xml" value="0.1" />
+        <entry key="..\:/JAVA_Projects/Android_DZ/1_first_DZ/app/src/main/res/drawable/ic_baseline_share_24.xml" value="0.142" />
+        <entry key="..\:/JAVA_Projects/Android_DZ/1_first_DZ/app/src/main/res/drawable/ic_launcher_foreground.xml" value="0.119" />
+        <entry key="..\:/JAVA_Projects/Android_DZ/1_first_DZ/app/src/main/res/drawable/ic_like_24.xml" value="0.114" />
+        <entry key="..\:/JAVA_Projects/Android_DZ/1_first_DZ/app/src/main/res/drawable/ic_like_24dp.xml" value="0.1" />
+        <entry key="..\:/JAVA_Projects/Android_DZ/1_first_DZ/app/src/main/res/drawable/ic_like_24new.xml" value="0.122" />
+        <entry key="..\:/JAVA_Projects/Android_DZ/1_first_DZ/app/src/main/res/drawable/ic_liked_24.xml" value="0.1515" />
+        <entry key="..\:/JAVA_Projects/Android_DZ/1_first_DZ/app/src/main/res/drawable/ic_likes_24.xml" value="0.1" />
+        <entry key="..\:/JAVA_Projects/Android_DZ/1_first_DZ/app/src/main/res/drawable/ic_ok_24dp.xml" value="0.16" />
+        <entry key="..\:/JAVA_Projects/Android_DZ/1_first_DZ/app/src/main/res/drawable/ic_options_24dp.xml" value="0.1685" />
+        <entry key="..\:/JAVA_Projects/Android_DZ/1_first_DZ/app/src/main/res/drawable/ic_play_48dp.xml" value="0.154" />
+        <entry key="..\:/JAVA_Projects/Android_DZ/1_first_DZ/app/src/main/res/drawable/ic_save_48.xml" value="0.141" />
+        <entry key="..\:/JAVA_Projects/Android_DZ/1_first_DZ/app/src/main/res/drawable/ic_save_48_blue.xml" value="0.141" />
+        <entry key="..\:/JAVA_Projects/Android_DZ/1_first_DZ/app/src/main/res/drawable/ic_share_24dp.xml" value="0.1" />
+        <entry key="..\:/JAVA_Projects/Android_DZ/1_first_DZ/app/src/main/res/drawable/ic_start_48dp.xml" value="0.154" />
+        <entry key="..\:/JAVA_Projects/Android_DZ/1_first_DZ/app/src/main/res/drawable/ic_view_24dp.xml" value="0.1" />
+        <entry key="..\:/JAVA_Projects/Android_DZ/1_first_DZ/app/src/main/res/layout-v26/post_list_item.xml" value="0.1" />
+        <entry key="..\:/JAVA_Projects/Android_DZ/1_first_DZ/app/src/main/res/layout/activity_main.xml" value="0.25" />
+        <entry key="..\:/JAVA_Projects/Android_DZ/1_first_DZ/app/src/main/res/layout/intent_handler_activity.xml" value="0.25" />
+        <entry key="..\:/JAVA_Projects/Android_DZ/1_first_DZ/app/src/main/res/layout/post_content_activity.xml" value="0.1" />
+        <entry key="..\:/JAVA_Projects/Android_DZ/1_first_DZ/app/src/main/res/layout/post_list_item.xml" value="0.1" />
+        <entry key="..\:/JAVA_Projects/Android_DZ/1_first_DZ/app/src/main/res/layout/post_text_and_url_activity.xml" value="0.1" />
+        <entry key="..\:/JAVA_Projects/Android_DZ/1_first_DZ/app/src/main/res/layout/video_content.xml" value="0.16058763931104356" />
+        <entry key="..\:/JAVA_Projects/Android_DZ/1_first_DZ/app/src/main/res/layout/video_url.xml" value="0.9" />
+        <entry key="..\:/JAVA_Projects/Android_DZ/1_first_DZ/app/src/main/res/menu/options_post.xml" value="0.1" />
+        <entry key="..\:/JAVA_Projects/Android_DZ/1_first_DZ/app/src/main/res/mipmap-anydpi-v26/ic_launcher.xml" value="0.122" />
         <entry key="..\:/JAVA_Projects/Android_lecture/1_first_DZ/app/src/main/res/layout/activity_main.xml" value="0.15374873353596757" />
       </map>
     </option>
