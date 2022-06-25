@@ -37,13 +37,11 @@ class MainActivity : AppCompatActivity() {
 //            Snackbar.make(binding.root, value, Snackbar.LENGTH_INDEFINITE).show()
 //        }
 
-
-
         val adapter = PostAdapter(viewModel)
         binding.PostsRecycleView.adapter = adapter
 
         viewModel.data.observe(this) {
-            adapter.submitList(it)
+            adapter.submitList(it) // метод вызывает обновление адаптера
         }
 
         binding.fab.setOnClickListener {

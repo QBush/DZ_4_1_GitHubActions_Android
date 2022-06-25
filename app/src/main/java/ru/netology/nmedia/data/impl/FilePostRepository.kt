@@ -8,6 +8,8 @@ import androidx.core.content.ContextCompat.startActivity
 import androidx.core.content.edit
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
+import com.google.gson.Gson
+import com.google.gson.reflect.TypeToken
 import kotlinx.serialization.decodeFromString
 import kotlinx.serialization.encodeToString
 import kotlinx.serialization.json.Json
@@ -15,9 +17,13 @@ import ru.netology.nmedia.Post
 import ru.netology.nmedia.data.PostRepository
 import kotlin.properties.Delegates
 
-class SharedPrefsPostRepository( // через shared Preferenses
-    application: Application
+class FilePostRepository( // через Буфферизованные потоки
+    private val application: Application
 ) : PostRepository {
+
+    private val gson = Gson()
+    private val type = TypeToken.getParameterized(List::class.java, Post::class.java).type
+
 
     private val prefs = application.getSharedPreferences(
         "repo", Context.MODE_PRIVATE
@@ -33,29 +39,35 @@ class SharedPrefsPostRepository( // через shared Preferenses
 
 
     private companion object {
-        const val POSTS_PREFS_KEY = "posts"
         const val NEXT_ID_PREFS_KEY = "id"
+        const val FILE_NAME = "posts.json"
+
     }
 
     private var posts // значение data.value, проверенное на null
         get() = checkNotNull(data.value) {
             "value should not be null"
         }
-        set(value) { // обновлеям префс и data при кждом изменении в постах
-            prefs.edit {
-                val serializedPosts = Json.encodeToString(value)
-                putString(POSTS_PREFS_KEY, serializedPosts)
+        set(value) { // запись  в поток при каждом обновлении списка постов
+            application.openFileOutput(FILE_NAME, Context.MODE_PRIVATE).bufferedWriter().use {
+                it.write(gson.toJson(value))
             }
+
             data.value = value
         }
 
     override val data: MutableLiveData<List<Post>>
 
-    init { // читаем из Преференса взятого
-        val serializedPosts = prefs.getString(POSTS_PREFS_KEY, null)
-        val posts: List<Post> = if (serializedPosts != null) {
-            Json.decodeFromString(serializedPosts)
+    init { // читаем с потока при старте
+        val postsFile = application.filesDir.resolve(FILE_NAME)
+        val posts :List<Post> = if (postsFile.exists())  {
+            val inputStream = application.openFileInput(FILE_NAME)
+            val reader = inputStream.bufferedReader()
+            reader.use {
+               gson.fromJson(it, type)
+            }
         } else emptyList()
+
         data = MutableLiveData(posts)
     }
 
