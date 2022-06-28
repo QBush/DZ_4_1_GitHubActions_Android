@@ -6,7 +6,7 @@
     android:layout_height="match_parent"
     android:orientation="vertical"
     android:padding="@dimen/common_spacing"
-    tools:context=".activity.MainActivity">
+    tools:context=".UI.FeedFragment">
 
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/PostsRecycleView"

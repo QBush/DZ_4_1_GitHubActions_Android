@@ -1,14 +1,12 @@
-package ru.netology.nmedia.activity
+package ru.netology.nmedia.UI
 // Активити для редактирования и создания поста
 
 import android.app.Activity
 import android.content.Context
 import android.content.Intent
-import android.net.Uri
 import android.os.Bundle
 import androidx.activity.result.contract.ActivityResultContract
 import androidx.appcompat.app.AppCompatActivity
-import androidx.core.content.ContextCompat
 import ru.netology.nmedia.PostEditableContent
 import ru.netology.nmedia.databinding.PostContentActivityBinding
 

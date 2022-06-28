@@ -11,7 +11,7 @@
         android:theme="@style/Theme.NMedia">
 
         <activity
-            android:name=".activity.MainActivity"
+            android:name=".UI.AppActivity"
             android:exported="true">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
@@ -20,7 +20,7 @@
             </intent-filter>
         </activity>
 
-        <activity android:name=".activity.IntentHandLerActivity"
+        <activity android:name=".UI.IntentHandLerActivity"
             android:exported="true">
             <intent-filter>
                 <action android:name="android.intent.action.SEND" />
@@ -31,8 +31,7 @@
             </intent-filter>
         </activity>
 
-
-        <activity android:name=".activity.PostContentActivity"
+        <activity android:name=".UI.PostContentActivity"
             android:exported="false">
         </activity>
 
