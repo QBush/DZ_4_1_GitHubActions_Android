@@ -31,9 +31,6 @@
             </intent-filter>
         </activity>
 
-        <activity android:name=".UI.PostContentActivity"
-            android:exported="false">
-        </activity>
 
     </application>
 

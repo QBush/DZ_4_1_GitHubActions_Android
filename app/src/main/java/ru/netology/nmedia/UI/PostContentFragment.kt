@@ -5,17 +5,18 @@ import android.app.Activity
 import android.content.Context
 import android.content.Intent
 import android.os.Bundle
+import android.view.LayoutInflater
+import android.view.View
+import android.view.ViewGroup
 import androidx.activity.result.contract.ActivityResultContract
 import androidx.appcompat.app.AppCompatActivity
+import androidx.fragment.app.Fragment
 import ru.netology.nmedia.PostEditableContent
 import ru.netology.nmedia.databinding.PostContentActivityBinding
 
-class PostContentActivity : AppCompatActivity() {
+class PostContentFragment : Fragment() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-
-        val binding = PostContentActivityBinding.inflate(layoutInflater)
-        setContentView(binding.root)
 
         val intent = intent
         var text = intent.getStringExtra(CONTENT_KEY)
@@ -38,17 +39,6 @@ class PostContentActivity : AppCompatActivity() {
             finish()
         }
     }
-
-//    object ResultContract : ActivityResultContract<String?, String?>(){
-//        override fun createIntent(context: Context, input: String?): Intent =
-//            Intent(context, PostContentActivity::class.java).putExtra(Intent.EXTRA_TEXT, input)
-//
-//
-//        override fun parseResult(resultCode: Int, intent: Intent?): String? =
-//            if (resultCode == Activity.RESULT_OK) {
-//                intent?.getStringExtra(RESULT_KEY)
-//            } else null
-//    }
 
     object ResultContractWithUrl :
         ActivityResultContract<PostEditableContent?, PostEditableContent?>() {
@@ -75,4 +65,11 @@ class PostContentActivity : AppCompatActivity() {
 
     }
 
+    override fun onCreateView(
+        inflater: LayoutInflater,
+        container: ViewGroup?,
+        savedInstanceState: Bundle?
+    ) = PostContentActivityBinding.inflate(layoutInflater, container, false).also {binding ->
+
+    }.root
 }
