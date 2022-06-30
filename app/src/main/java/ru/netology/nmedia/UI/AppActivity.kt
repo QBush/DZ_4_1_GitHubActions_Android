@@ -4,6 +4,7 @@ import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
 import androidx.fragment.app.commit
 import ru.netology.nmedia.R
+import ru.netology.nmedia.UI.FeedFragment.Companion.TEG
 import ru.netology.nmedia.databinding.AppActivityBinding
 
 class AppActivity : AppCompatActivity() {
@@ -14,8 +15,10 @@ class AppActivity : AppCompatActivity() {
         val binding = AppActivityBinding.inflate(layoutInflater)
         setContentView(binding.root)
 
-        supportFragmentManager.commit {
-            add(R.id.fragmentContainer, FeedFragment())
+        if (supportFragmentManager.findFragmentByTag(TEG) == null) {
+            supportFragmentManager.commit {
+                add(R.id.fragmentContainer, FeedFragment(), TEG)
+            }
         }
     }
 }

@@ -8,6 +8,7 @@ import com.google.android.material.snackbar.Snackbar
 import ru.netology.nmedia.databinding.IntentHandlerActivityBinding
 
 class IntentHandLerActivity : AppCompatActivity() { // класс для приема внешних интентов из других программ
+    //наш пример см метод sharePostContent
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
 
