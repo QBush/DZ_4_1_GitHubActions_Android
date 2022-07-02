@@ -1,38 +1,38 @@
 package ru.netology.nmedia.UI
 // Активити для редактирования и создания поста
 
-import android.app.Activity
-import android.content.Context
-import android.content.Intent
 import android.os.Bundle
 import android.view.LayoutInflater
-import android.view.View
 import android.view.ViewGroup
-import androidx.activity.result.contract.ActivityResultContract
-import androidx.appcompat.app.AppCompatActivity
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.setFragmentResult
+import androidx.navigation.fragment.findNavController
+import androidx.navigation.fragment.navArgs
 import ru.netology.nmedia.PostEditableContent
-import ru.netology.nmedia.databinding.PostContentActivityBinding
+import ru.netology.nmedia.databinding.PostContentFragmentBinding
 
 class PostContentFragment : Fragment() {
 
-    private var initialText = requireArguments().getString(INITIAL_TEXT_KEY)
-    private var initialUrl = requireArguments().getString(INITIAL_URL_KEY)
+    private val args by navArgs<PostContentFragmentArgs>()
+
+
+
+//    private val initialText
+//        get() = requireArguments().getString(INITIAL_TEXT_KEY)
+//    private val initialUrl
+//        get() = requireArguments().getString(INITIAL_URL_KEY)
 
 
     override fun onCreateView(
         inflater: LayoutInflater,
         container: ViewGroup?,
         savedInstanceState: Bundle?
-    ) = PostContentActivityBinding.inflate(layoutInflater, container, false).also { binding ->
+    ) = PostContentFragmentBinding.inflate(layoutInflater, container, false).also { binding ->
 
-// TODO по лекции забрать из arguments данные и присвоить их стартовым полям.
-
-
+// TODO сделать передачу данных своим типом данных
         binding.postTextAndUrlActivity.edit.requestFocus()
-        binding.postTextAndUrlActivity.edit.setText(initialText)
-        binding.postTextAndUrlActivity.videoUrl.setText(initialUrl)
+        binding.postTextAndUrlActivity.edit.setText(args.initialText)
+//        binding.postTextAndUrlActivity.videoUrl.setText(args.initialUrl)
 
         binding.ok.setOnClickListener {
             if (!binding.postTextAndUrlActivity.edit.text.isNullOrBlank()) {
@@ -43,7 +43,7 @@ class PostContentFragment : Fragment() {
                 resultBundle.putString(URL_KEY, url)
                 setFragmentResult(REQUEST_KEY, resultBundle)
             }
-            parentFragmentManager.popBackStack() // уходим назад с этого фрагмента
+            findNavController().popBackStack() // уходим назад с этого фрагмента
 
         }
     }.root
@@ -52,17 +52,18 @@ class PostContentFragment : Fragment() {
         const val REQUEST_KEY = "RequestKey"
         const val CONTENT_KEY = "PostContent"
         const val URL_KEY = "PostUrl"
-        private const val INITIAL_TEXT_KEY = "PostInitialText"
-        private const val INITIAL_URL_KEY = "PostInitialText"
+//        private const val INITIAL_TEXT_KEY = "PostInitialText"
+//        private const val INITIAL_URL_KEY = "PostInitialUrl"
 
 
-        // функция, которую мы вызываем при создании Фрагмента. Потом из аргументов достаем данные здесь же
-        fun create(initialContent: PostEditableContent?) = PostContentFragment().apply {
-            arguments = Bundle(2).also {
-                if (initialContent == null) return@apply
-                it.putString(INITIAL_TEXT_KEY, initialContent.content)
-                it.putString(INITIAL_URL_KEY, initialContent.videoUrl)
-            }
-        }
+        // функция, которую мы вызываем для создания Фрагмента. Потом из аргументов достаем данные (см onCreateView)
+//        fun create(initialContent: PostEditableContent?) = PostContentFragment().apply {
+//            arguments = createBundle(initialContent)
+//        }
+//
+//        fun createBundle(initialContent: PostEditableContent?) = Bundle(2).apply {
+//            putString(INITIAL_TEXT_KEY, initialContent?.content)
+//            putString(INITIAL_URL_KEY, initialContent?.videoUrl)
+//        }
     }
 }

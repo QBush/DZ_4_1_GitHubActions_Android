@@ -7,18 +7,4 @@ import ru.netology.nmedia.R
 import ru.netology.nmedia.UI.FeedFragment.Companion.TEG
 import ru.netology.nmedia.databinding.AppActivityBinding
 
-class AppActivity : AppCompatActivity() {
-
-    override fun onCreate(savedInstanceState: Bundle?) {
-        super.onCreate(savedInstanceState)
-
-        val binding = AppActivityBinding.inflate(layoutInflater)
-        setContentView(binding.root)
-
-        if (supportFragmentManager.findFragmentByTag(TEG) == null) {
-            supportFragmentManager.commit {
-                add(R.id.fragmentContainer, FeedFragment(), TEG)
-            }
-        }
-    }
-}
+class AppActivity : AppCompatActivity(R.layout.app_activity)

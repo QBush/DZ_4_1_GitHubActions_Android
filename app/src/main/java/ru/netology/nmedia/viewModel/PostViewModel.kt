@@ -42,12 +42,12 @@ class PostViewModel (
         currentPost.value = null
     }
 
+    //region MenuInteractionListener
+
     override fun onEditClick(post: Post) {
         currentPost.value = post
         navigateToPostContentScreenEventWithUrl.value = PostEditableContent(post.content, post.videoUrl)
     }
-
-
 
     //endregion MenuInteractionListener
 
