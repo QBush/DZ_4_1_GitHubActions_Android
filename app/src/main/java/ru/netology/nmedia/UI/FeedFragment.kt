@@ -33,7 +33,7 @@ class FeedFragment : Fragment() {
             startActivity(shareIntent) // отдаем неявный интент наружу
         }
 
-        setFragmentResultListener( // принимает bundle из других фрагментов
+        setFragmentResultListener( // принимает bundle из других фрагментов (из редактирования)
             requestKey = REQUEST_KEY
         ) { requestKey, bundle ->
             if (requestKey != REQUEST_KEY) return@setFragmentResultListener
@@ -44,13 +44,20 @@ class FeedFragment : Fragment() {
         }
 
         // создаем фрагмент с данными, заменяем собой старый фрагмент (текущий) и возвращаемся обратно
-        // TODO заполнить передачу данных своим типом данных
-        viewModel.navigateToPostContentScreenEventWithUrl.observe(this) { it ->
+        // TODO заполнить передачу данных своим типом данных (URL не сделано)
+        viewModel.navigateToPostContentScreenEventWithUrl.observe(this) {
             val direction = FeedFragmentDirections.toPostContentFragment(it?.content)
             findNavController().navigate(direction)
         }
 
-        // TODO сделать, чтобы работало с фрагментом
+        // TODO 3 Передаем id поста в PostFragment
+        viewModel.navigateToPostFragment.observe(this) {
+            println("3")
+            val direction = FeedFragmentDirections.toPostFragment(it)
+            findNavController().navigate(direction)
+        }
+
+
         viewModel.playVideoEventFromExternalActivity.observe(this) {
             val intent = Intent(Intent.ACTION_VIEW, Uri.parse(it))
             startActivity(intent)
@@ -73,6 +80,7 @@ class FeedFragment : Fragment() {
         binding.fab.setOnClickListener {
             viewModel.onAddClicked()
         }
+
     }.root
 
     companion object {

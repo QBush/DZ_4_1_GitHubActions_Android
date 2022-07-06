@@ -52,6 +52,7 @@ class PostContentFragment : Fragment() {
         const val REQUEST_KEY = "RequestKey"
         const val CONTENT_KEY = "PostContent"
         const val URL_KEY = "PostUrl"
+
 //        private const val INITIAL_TEXT_KEY = "PostInitialText"
 //        private const val INITIAL_URL_KEY = "PostInitialUrl"
 

@@ -13,36 +13,20 @@ import ru.netology.nmedia.data.impl.InMemoryPostRepository
 import ru.netology.nmedia.data.impl.SharedPrefsPostRepository
 import ru.netology.nmedia.utils.SingleLiveEvent
 
-class PostViewModel(
+class CurrentPostViewModel(
     application: Application
-) : AndroidViewModel(application), PostInteractionListener {
-
+) : ViewModel(), PostInteractionListener {
+    //TODO репозиторий нужно сделать синглтоном, иначе будут разные репозитории в разных вью-моделях
     private val repository: PostRepository = FilePostRepository(application)
 
     val data by repository::data
 
     val sharePostContent = SingleLiveEvent<String>()
     val navigateToPostContentScreenEventWithUrl = SingleLiveEvent<PostEditableContent?>()
-    val navigateToPostFragment = SingleLiveEvent<Long>()
     val playVideoEventFromExternalActivity = SingleLiveEvent<String?>()
 
 
     private val currentPost = MutableLiveData<Post?>(null)
-
-    fun onSaveButtonClick(content: String, videoUrl: String? = null) {
-        if (content.isBlank()) return
-        val post = currentPost.value?.copy(
-            content = content, videoUrl = videoUrl
-        ) ?: Post(
-            id = PostRepository.NEW_POST_ID,
-            author = "me",
-            content = content,
-            published = "12.05.2022",
-            videoUrl = videoUrl
-        )
-        repository.save(post)
-        currentPost.value = null
-    }
 
     //region MenuInteractionListener
 
@@ -53,10 +37,6 @@ class PostViewModel(
     }
 
     //endregion MenuInteractionListener
-
-    fun onAddClicked() {
-        navigateToPostContentScreenEventWithUrl.call()
-    }
 
     //region PostInteractionListener
 
@@ -72,12 +52,8 @@ class PostViewModel(
         playVideoEventFromExternalActivity.value = post.videoUrl
     }
 
-    // TODO 2 здесь вызываем в FeedFragment реакцию
-    override fun onContentClick(post: Post) {
-        println("2")
-        navigateToPostFragment.value = post.id
 
-    }
+    override fun onContentClick(post: Post) { }
 
 
     // endregion PostInteractionListener

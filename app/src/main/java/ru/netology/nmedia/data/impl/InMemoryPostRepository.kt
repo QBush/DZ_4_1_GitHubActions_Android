@@ -61,6 +61,10 @@ class InMemoryPostRepository : PostRepository {
         if (post.id == PostRepository.NEW_POST_ID) insert(post) else update(post)
     }
 
+    override fun findPostById(postID: Long) = posts.first {
+        it.id == postID
+    }
+
     private fun insert(post: Post) {
         data.value = listOf(post.copy(id = ++nextID)) + posts
     }

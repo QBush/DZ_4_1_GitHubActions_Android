@@ -12,7 +12,11 @@
         <action
             android:id="@+id/toPostContentFragment"
             app:destination="@id/postContentFragment" />
+        <action
+            android:id="@+id/toPostFragment"
+            app:destination="@id/postFragment" />
     </fragment>
+
     <fragment
         android:id="@+id/postContentFragment"
         android:name="ru.netology.nmedia.UI.PostContentFragment">
@@ -29,4 +33,14 @@
             android:defaultValue="null"
             />
     </fragment>
+
+    <fragment
+        android:id="@+id/postFragment"
+        android:name="ru.netology.nmedia.UI.PostFragment"
+        android:label="PostFragment" >
+        <argument
+            android:name="initialPostID"
+            app:argType="long" />
+    </fragment>
+
 </navigation>

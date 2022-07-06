@@ -39,9 +39,12 @@ internal class PostAdapter(
             binding.likes.setOnClickListener { interactionListener.onLikeClick(post) }
             binding.share.setOnClickListener { interactionListener.onShareClick(post) }
             binding.options.setOnClickListener { popupMenu.show() }
+            //TODO 1 здесь начинается движение
+            binding.postText.setOnClickListener {
+                println("1")
+                interactionListener.onContentClick(post)
 
-            /* TODO Возможно, нужно сделать активити поста, которую запускать через Интент при нажатии
-TODO Разобраться еще раз с процессом запуска рейсайкл вью */
+            }
             binding.video.background.setOnClickListener {
                 interactionListener.onVideoClick(post)
             }

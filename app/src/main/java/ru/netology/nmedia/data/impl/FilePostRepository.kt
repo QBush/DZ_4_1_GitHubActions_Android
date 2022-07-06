@@ -25,6 +25,12 @@ class FilePostRepository( // через Буфферизованные пото�
     private val type = TypeToken.getParameterized(List::class.java, Post::class.java).type
     private val typeID = TypeToken.getParameterized(Long::class.java).type
 
+    private companion object {
+        const val NEXT_ID_PREFS_KEY = "id"
+        const val FILE_NAME = "posts.json"
+        const val FILE_NAME2 = "postsID.json"
+
+    }
 
 //    private val prefs = application.getSharedPreferences(
 //        "repo", Context.MODE_PRIVATE
@@ -39,6 +45,7 @@ class FilePostRepository( // через Буфферизованные пото�
 //    }
 
     private var nextID: Long
+
     init {
         val idFile = application.filesDir.resolve(FILE_NAME2)
         val id: Long = if (idFile.exists()) {
@@ -57,14 +64,6 @@ class FilePostRepository( // через Буфферизованные пото�
         }
     }
 
-    private companion object {
-        const val NEXT_ID_PREFS_KEY = "id"
-        const val FILE_NAME = "posts.json"
-        const val FILE_NAME2 = "postsID.json"
-
-    }
-
-
     private var posts // значение data.value, проверенное на null
         get() = checkNotNull(data.value) {
             "value should not be null"
@@ -78,6 +77,7 @@ class FilePostRepository( // через Буфферизованные пото�
         }
 
     override val data: MutableLiveData<List<Post>>
+
     init { // читаем с потока при старте
         val postsFile = application.filesDir.resolve(FILE_NAME)
         val posts: List<Post> = if (postsFile.exists()) {
@@ -129,7 +129,12 @@ class FilePostRepository( // через Буфферизованные пото�
             if (it.id == post.id) post else it
         }
     }
+
+    override fun findPostById(postID: Long) = posts.first {
+        it.id == postID
+    }
 }
+
 
 
 
