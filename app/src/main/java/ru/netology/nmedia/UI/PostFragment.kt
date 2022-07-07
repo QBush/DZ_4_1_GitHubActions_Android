@@ -18,7 +18,7 @@ import ru.netology.nmedia.viewModel.CurrentPostViewModel
 
 
 // TODO Репозиторий нужно сделать объектом
-// TODO
+
 
 class PostFragment : Fragment() {
 

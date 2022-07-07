@@ -29,23 +29,10 @@ class FilePostRepository( // через Буфферизованные пото�
         const val NEXT_ID_PREFS_KEY = "id"
         const val FILE_NAME = "posts.json"
         const val FILE_NAME2 = "postsID.json"
-
     }
 
-//    private val prefs = application.getSharedPreferences(
-//        "repo", Context.MODE_PRIVATE
-//    )
-//
-//    private var nextID: Long by Delegates.observable(
-//        // это все, чтобы сохранялся ID постов при перезапуске в префах
-//        // после этой операции в префах по другому ключу сохранилось новое значение ID
-//        prefs.getLong(NEXT_ID_PREFS_KEY, 0L)
-//    ) { _, _, newValue ->
-//        prefs.edit { putLong(NEXT_ID_PREFS_KEY, newValue) }
-//    }
 
     private var nextID: Long
-
     init {
         val idFile = application.filesDir.resolve(FILE_NAME2)
         val id: Long = if (idFile.exists()) {
@@ -77,7 +64,6 @@ class FilePostRepository( // через Буфферизованные пото�
         }
 
     override val data: MutableLiveData<List<Post>>
-
     init { // читаем с потока при старте
         val postsFile = application.filesDir.resolve(FILE_NAME)
         val posts: List<Post> = if (postsFile.exists()) {
