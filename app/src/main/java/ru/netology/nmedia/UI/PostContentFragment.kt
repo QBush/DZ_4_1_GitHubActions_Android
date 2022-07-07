@@ -13,9 +13,8 @@ import ru.netology.nmedia.databinding.PostContentFragmentBinding
 
 class PostContentFragment : Fragment() {
 
+
     private val args by navArgs<PostContentFragmentArgs>()
-
-
 
 //    private val initialText
 //        get() = requireArguments().getString(INITIAL_TEXT_KEY)
@@ -29,10 +28,9 @@ class PostContentFragment : Fragment() {
         savedInstanceState: Bundle?
     ) = PostContentFragmentBinding.inflate(layoutInflater, container, false).also { binding ->
 
-// TODO сделать передачу данных своим типом данных
         binding.postTextAndUrlActivity.edit.requestFocus()
-        binding.postTextAndUrlActivity.edit.setText(args.initialText)
-//        binding.postTextAndUrlActivity.videoUrl.setText(args.initialUrl)
+        binding.postTextAndUrlActivity.edit.setText(args.initialContent?.content)
+        binding.postTextAndUrlActivity.videoUrl.setText(args.initialContent?.videoUrl)
 
         binding.ok.setOnClickListener {
             if (!binding.postTextAndUrlActivity.edit.text.isNullOrBlank()) {

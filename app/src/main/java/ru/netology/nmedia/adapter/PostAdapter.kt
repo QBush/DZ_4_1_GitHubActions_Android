@@ -15,6 +15,7 @@ import androidx.recyclerview.widget.RecyclerView
 import ru.netology.nmedia.Post
 import ru.netology.nmedia.R
 import ru.netology.nmedia.databinding.PostListItemBinding
+import ru.netology.nmedia.thousandKChanger
 
 internal class PostAdapter(
     private val interactionListener: PostInteractionListener
@@ -78,8 +79,8 @@ internal class PostAdapter(
                 date.text = post.published
                 postText.text = post.content
                 likes.isChecked = post.likedByMe
-                likes.text = thousandKChanger(post.likeCount)
-                share.text = thousandKChanger(post.shareCount)
+                likes.text = post.likeCount.thousandKChanger()
+                share.text = post.shareCount.thousandKChanger()
                 if (post.videoUrl?.isNotBlank() == true) {
                     video.root.visibility = View.VISIBLE
                 }
@@ -87,14 +88,6 @@ internal class PostAdapter(
         }
     }
 
-    private fun thousandKChanger(number: Long): String =
-        when (number) {
-            0L -> ""
-            in 1..999 -> number.toString()
-            in 1000..9999 -> "${String.format("%.1f", (number.toDouble() / 1000))}K"
-            in 10_000..999_999 -> "${number / 1000}K"
-            else -> "${number / 1_000_000}M"
-        }
 
     // для сравнения объектов через ListAdapter
     private object DiffCallback : DiffUtil.ItemCallback<Post>() {

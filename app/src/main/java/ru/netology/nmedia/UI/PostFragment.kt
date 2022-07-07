@@ -13,6 +13,7 @@ import androidx.navigation.fragment.navArgs
 import ru.netology.nmedia.Post
 import ru.netology.nmedia.R
 import ru.netology.nmedia.databinding.PostListItemBinding
+import ru.netology.nmedia.thousandKChanger
 import ru.netology.nmedia.viewModel.CurrentPostViewModel
 
 
@@ -37,17 +38,17 @@ class PostFragment : Fragment() {
         val currentPost = viewModel.data.value?.firstOrNull {
             println("5")
             it.id == curentId
+        } ?: findNavController().run {
+            popBackStack()
+            return@also
         }
-
-
-        if (currentPost != null) {
             with(binding) {
                 authorName.text = currentPost.author
                 date.text = currentPost.published
                 postText.text = currentPost.content
                 likes.isChecked = currentPost.likedByMe
-                likes.text = thousandKChanger(currentPost.likeCount)
-                share.text = thousandKChanger(currentPost.shareCount)
+                likes.text = currentPost.likeCount.thousandKChanger()
+                share.text = currentPost.shareCount.thousandKChanger()
                 if (currentPost.videoUrl?.isNotBlank() == true) {
                     video.root.visibility = View.VISIBLE
                 }
@@ -78,17 +79,10 @@ class PostFragment : Fragment() {
             binding.video.background.setOnClickListener {
                 viewModel.onVideoClick(currentPost)
             }
-        }
+
     }.root
 
-    private fun thousandKChanger(number: Long): String =
-        when (number) {
-            0L -> ""
-            in 1..999 -> number.toString()
-            in 1000..9999 -> "${String.format("%.1f", (number.toDouble() / 1000))}K"
-            in 10_000..999_999 -> "${number / 1000}K"
-            else -> "${number / 1_000_000}M"
-        }
+
 
 }
 

@@ -21,17 +21,12 @@
         android:id="@+id/postContentFragment"
         android:name="ru.netology.nmedia.UI.PostContentFragment">
         <argument
-            android:name="initialText"
-            app:argType="string"
+            android:name="initialContent"
+            app:argType="ru.netology.nmedia.PostEditableContent"
             app:nullable="true"
             android:defaultValue="null"
             />
-        <argument
-            android:name="initialUrl"
-            app:argType="string"
-            app:nullable="true"
-            android:defaultValue="null"
-            />
+
     </fragment>
 
     <fragment

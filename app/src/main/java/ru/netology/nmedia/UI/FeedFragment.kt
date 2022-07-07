@@ -43,10 +43,8 @@ class FeedFragment : Fragment() {
             viewModel.onSaveButtonClick(newPostText, newPostURL)
         }
 
-        // создаем фрагмент с данными, заменяем собой старый фрагмент (текущий) и возвращаемся обратно
-        // TODO заполнить передачу данных своим типом данных (URL не сделано)
         viewModel.navigateToPostContentScreenEventWithUrl.observe(this) {
-            val direction = FeedFragmentDirections.toPostContentFragment(it?.content)
+            val direction = FeedFragmentDirections.toPostContentFragment(it)
             findNavController().navigate(direction)
         }
 
