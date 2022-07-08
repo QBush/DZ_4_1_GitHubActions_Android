@@ -12,6 +12,7 @@
 
         <activity
             android:name=".UI.AppActivity"
+            android:launchMode="singleTask"
             android:windowSoftInputMode="adjustResize"
             android:exported="true">
             <intent-filter>

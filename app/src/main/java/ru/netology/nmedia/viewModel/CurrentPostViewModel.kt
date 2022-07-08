@@ -16,7 +16,7 @@ import ru.netology.nmedia.utils.SingleLiveEvent
 class CurrentPostViewModel(
     application: Application
 ) : ViewModel(), PostInteractionListener {
-    //TODO репозиторий нужно сделать синглтоном, иначе будут разные репозитории в разных вью-моделях
+
     private val repository: PostRepository = FilePostRepository(application)
 
     val data by repository::data
