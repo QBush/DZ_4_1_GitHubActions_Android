@@ -12,24 +12,24 @@ import androidx.navigation.fragment.findNavController
 import androidx.navigation.fragment.navArgs
 import ru.netology.nmedia.Post
 import ru.netology.nmedia.R
+import ru.netology.nmedia.databinding.PostFragmentBinding
 import ru.netology.nmedia.databinding.PostListItemBinding
 import ru.netology.nmedia.thousandKChanger
 import ru.netology.nmedia.viewModel.CurrentPostViewModel
-
-
-// TODO Репозиторий нужно сделать объектом
+import ru.netology.nmedia.viewModel.PostViewModel
 
 
 class PostFragment : Fragment() {
 
-    private val viewModel by viewModels<CurrentPostViewModel>()
+    private val viewModel by viewModels<PostViewModel>(ownerProducer = ::requireParentFragment)
+
     private val args by navArgs<PostFragmentArgs>()
 
     override fun onCreateView(
         inflater: LayoutInflater,
         container: ViewGroup?,
         savedInstanceState: Bundle?
-    ) = PostListItemBinding.inflate(layoutInflater, container, false).also { binding ->
+    ) = PostFragmentBinding.inflate(layoutInflater, container, false).also { binding ->
 
         // TODO 4 Получаем id поста из FeedFragment.
         val curentId = args.initialPostID
@@ -42,7 +42,9 @@ class PostFragment : Fragment() {
             popBackStack()
             return@also
         }
-            with(binding) {
+
+
+            with(binding.postLayout) {
                 authorName.text = currentPost.author
                 date.text = currentPost.published
                 postText.text = currentPost.content
@@ -55,7 +57,7 @@ class PostFragment : Fragment() {
             }
 
             val popupMenu by lazy {
-                PopupMenu(context, binding.options).apply {
+                PopupMenu(context, binding.postLayout.options).apply {
                     inflate(R.menu.options_post)
                     setOnMenuItemClickListener { menuItem ->
                         when (menuItem.itemId) {
@@ -73,10 +75,10 @@ class PostFragment : Fragment() {
                 }
             }
 
-            binding.likes.setOnClickListener { viewModel.onLikeClick(currentPost) }
-            binding.share.setOnClickListener { viewModel.onShareClick(currentPost) }
-            binding.options.setOnClickListener { popupMenu.show() }
-            binding.video.background.setOnClickListener {
+            binding.postLayout.likes.setOnClickListener { viewModel.onLikeClick(currentPost) }
+            binding.postLayout.share.setOnClickListener { viewModel.onShareClick(currentPost) }
+            binding.postLayout.options.setOnClickListener { popupMenu.show() }
+            binding.postLayout.video.background.setOnClickListener {
                 viewModel.onVideoClick(currentPost)
             }
 

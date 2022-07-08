@@ -16,7 +16,7 @@ import ru.netology.nmedia.viewModel.PostViewModel
 
 class FeedFragment : Fragment() {
 
-    private val viewModel by viewModels<PostViewModel>()
+    private val viewModel by viewModels<PostViewModel>(ownerProducer = ::requireParentFragment)
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -33,15 +33,15 @@ class FeedFragment : Fragment() {
             startActivity(shareIntent) // отдаем неявный интент наружу
         }
 
-        setFragmentResultListener( // принимает bundle из других фрагментов (из редактирования)
-            requestKey = REQUEST_KEY
-        ) { requestKey, bundle ->
-            if (requestKey != REQUEST_KEY) return@setFragmentResultListener
-            val newPostText = bundle.getString(PostContentFragment.CONTENT_KEY)
-                ?: return@setFragmentResultListener
-            val newPostURL = bundle.getString(PostContentFragment.URL_KEY)
-            viewModel.onSaveButtonClick(newPostText, newPostURL)
-        }
+//        setFragmentResultListener( // принимает bundle из других фрагментов (из редактирования)
+//            requestKey = REQUEST_KEY
+//        ) { requestKey, bundle ->
+//            if (requestKey != REQUEST_KEY) return@setFragmentResultListener
+//            val newPostText = bundle.getString(PostContentFragment.CONTENT_KEY)
+//                ?: return@setFragmentResultListener
+//            val newPostURL = bundle.getString(PostContentFragment.URL_KEY)
+//            viewModel.onSaveButtonClick(newPostText, newPostURL)
+//        }
 
         viewModel.navigateToPostContentScreenEventWithUrl.observe(this) {
             val direction = FeedFragmentDirections.toPostContentFragment(it)

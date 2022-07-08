@@ -6,14 +6,16 @@ import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.setFragmentResult
+import androidx.fragment.app.viewModels
 import androidx.navigation.fragment.findNavController
 import androidx.navigation.fragment.navArgs
 import ru.netology.nmedia.PostEditableContent
 import ru.netology.nmedia.databinding.PostContentFragmentBinding
+import ru.netology.nmedia.viewModel.PostViewModel
 
 class PostContentFragment : Fragment() {
 
-
+    private val viewModel by viewModels<PostViewModel>(ownerProducer = ::requireParentFragment)
     private val args by navArgs<PostContentFragmentArgs>()
 
 //    private val initialText
@@ -36,10 +38,11 @@ class PostContentFragment : Fragment() {
             if (!binding.postTextAndUrlActivity.edit.text.isNullOrBlank()) {
                 val text = binding.postTextAndUrlActivity.edit.text.toString()
                 val url = binding.postTextAndUrlActivity.videoUrl.text.toString()
-                val resultBundle = Bundle(2)
-                resultBundle.putString(CONTENT_KEY, text)
-                resultBundle.putString(URL_KEY, url)
-                setFragmentResult(REQUEST_KEY, resultBundle)
+                viewModel.onSaveButtonClick(text, url)
+//                val resultBundle = Bundle(2)
+//                resultBundle.putString(CONTENT_KEY, text)
+//                resultBundle.putString(URL_KEY, url)
+//                setFragmentResult(REQUEST_KEY, resultBundle)
             }
             findNavController().popBackStack() // уходим назад с этого фрагмента
 
