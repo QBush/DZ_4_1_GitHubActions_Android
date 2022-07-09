@@ -8,7 +8,6 @@ import android.view.ViewGroup
 import androidx.fragment.app.*
 import androidx.navigation.fragment.findNavController
 import ru.netology.nmedia.R
-import ru.netology.nmedia.UI.PostContentFragment.Companion.REQUEST_KEY
 import ru.netology.nmedia.adapter.PostAdapter
 import ru.netology.nmedia.databinding.FeedFragmentBinding
 import ru.netology.nmedia.viewModel.PostViewModel
@@ -44,7 +43,7 @@ class FeedFragment : Fragment() {
 //        }
 
 
-        viewModel.navigateToPostContentScreenEventWithUrl.observe(this) {
+        viewModel.navigateToPostContentFromFeedFragment.observe(this) {
             val direction = FeedFragmentDirections.toPostContentFragment(it)
             findNavController().navigate(direction)
         }
