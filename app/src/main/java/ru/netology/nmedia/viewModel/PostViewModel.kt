@@ -26,7 +26,6 @@ class PostViewModel(
     val navigateToPostFragment = SingleLiveEvent<Long>()
     val playVideoEventFromExternalActivity = SingleLiveEvent<String?>()
 
-
     private val currentPost = MutableLiveData<Post?>(null)
 
     fun onSaveButtonClick(content: String, videoUrl: String? = null) {
@@ -74,7 +73,6 @@ class PostViewModel(
 
     // TODO 2 здесь вызываем в FeedFragment реакцию
     override fun onContentClick(post: Post) {
-        println("2")
         navigateToPostFragment.value = post.id
 
     }

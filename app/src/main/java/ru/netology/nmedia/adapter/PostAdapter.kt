@@ -24,7 +24,7 @@ internal class PostAdapter(
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
         val inflater = LayoutInflater.from(parent.context)
         val binding = PostListItemBinding.inflate(inflater, parent, false)
-        return ViewHolder(binding)
+        return ViewHolder(binding, interactionListener)
     }
 
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
@@ -32,8 +32,9 @@ internal class PostAdapter(
     }
 
 
-    inner class ViewHolder(
-        private val binding: PostListItemBinding
+    class ViewHolder(
+        private val binding: PostListItemBinding,
+        private val interactionListener: PostInteractionListener
     ) : RecyclerView.ViewHolder(binding.root) {
 
         init {
@@ -42,9 +43,7 @@ internal class PostAdapter(
             binding.options.setOnClickListener { popupMenu.show() }
             //TODO 1 здесь начинается движение
             binding.postText.setOnClickListener {
-                println("1")
                 interactionListener.onContentClick(post)
-
             }
             binding.video.background.setOnClickListener {
                 interactionListener.onVideoClick(post)

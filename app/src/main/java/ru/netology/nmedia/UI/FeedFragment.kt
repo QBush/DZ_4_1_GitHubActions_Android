@@ -50,7 +50,6 @@ class FeedFragment : Fragment() {
 
         // TODO 3 Передаем id поста в PostFragment
         viewModel.navigateToPostFragment.observe(this) {
-            println("3")
             val direction = FeedFragmentDirections.toPostFragment(it)
             findNavController().navigate(direction)
         }

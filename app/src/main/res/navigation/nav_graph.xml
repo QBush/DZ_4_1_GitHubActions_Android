@@ -35,7 +35,8 @@
         android:label="PostFragment" >
         <argument
             android:name="initialPostID"
-            app:argType="long" />
+            app:argType="long"
+           />
         <action
             android:id="@+id/action_postFragment_to_postContentFragment"
             app:destination="@id/postContentFragment" />

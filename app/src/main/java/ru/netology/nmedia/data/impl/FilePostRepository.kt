@@ -115,10 +115,6 @@ class FilePostRepository( // через Буфферизованные пото�
             if (it.id == post.id) post else it
         }
     }
-
-    override fun findPostById(postID: Long) = posts.first {
-        it.id == postID
-    }
 }
 
 
