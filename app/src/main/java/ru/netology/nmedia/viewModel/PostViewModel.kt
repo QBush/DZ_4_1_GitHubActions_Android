@@ -22,7 +22,7 @@ class PostViewModel(
     val data by repository::data
 
     val sharePostContent = SingleLiveEvent<String>()
-    val navigateToPostContentScreenEventWithUrl = SingleLiveEvent<PostEditableContent?>()
+    val navigateToPostContentFromFeedFragment = SingleLiveEvent<PostEditableContent?>()
     val navigateToPostFragment = SingleLiveEvent<Long>()
     val playVideoEventFromExternalActivity = SingleLiveEvent<String?>()
 
@@ -47,14 +47,14 @@ class PostViewModel(
 
     override fun onEditClick(post: Post) {
         currentPost.value = post
-        navigateToPostContentScreenEventWithUrl.value =
+        navigateToPostContentFromFeedFragment.value =
             PostEditableContent(post.content, post.videoUrl)
     }
 
     //endregion MenuInteractionListener
 
     fun onAddClicked() {
-        navigateToPostContentScreenEventWithUrl.call()
+        navigateToPostContentFromFeedFragment.call()
     }
 
     //region PostInteractionListener
