@@ -18,6 +18,7 @@ reserve.md
 HELP.md
 .gradle
 build/
+Conditions/
 
 local.properties
 captures/
@@ -25,4 +26,3 @@ captures/
 .cxx
 
 
-Condition.docx
