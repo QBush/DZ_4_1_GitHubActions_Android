@@ -13,6 +13,7 @@ import androidx.navigation.fragment.findNavController
 import androidx.navigation.fragment.navArgs
 import ru.netology.nmedia.Post
 import ru.netology.nmedia.R
+import ru.netology.nmedia.UI.FeedFragmentDirections.Companion.toPostContentFragment
 import ru.netology.nmedia.adapter.PostAdapter
 import ru.netology.nmedia.databinding.PostFragmentBinding
 import ru.netology.nmedia.findPostById
@@ -38,11 +39,11 @@ class PostFragment : Fragment() {
 
         val viewHolder = PostAdapter.ViewHolder(binding.postLayout, viewModel)
         viewModel.data.observe(viewLifecycleOwner) {
-                findPostById(currentId, it)?.let { it1 -> viewHolder.bind(it1) }
-                    ?: findNavController().popBackStack()
+            findPostById(currentId, it)?.let { it1 -> viewHolder.bind(it1) }
+                ?: findNavController().popBackStack()
         }
 
-        viewModel.sharePostContent.observe(this) { postContent ->
+        viewModel.sharePostContent.observe(viewLifecycleOwner) { postContent ->
             val intent = Intent().apply {
                 action = Intent.ACTION_SEND
                 putExtra(Intent.EXTRA_TEXT, postContent)
@@ -54,18 +55,18 @@ class PostFragment : Fragment() {
             startActivity(shareIntent) // отдаем неявный интент наружу
         }
 
-        viewModel.navigateToPostContentFromFeedFragment.observe(this) {
-            val direction = FeedFragmentDirections.toPostContentFragment(it)
+        viewModel.navigateToPostContentFromFeedFragment.observe(viewLifecycleOwner) {
+            val direction = PostFragmentDirections.postFragmentToPostContentFragment(it)
             findNavController().navigate(direction)
         }
 
-        viewModel.playVideoEventFromExternalActivity.observe(this) {
+        viewModel.playVideoEventFromExternalActivity.observe(viewLifecycleOwner) {
             val intent = Intent(Intent.ACTION_VIEW, Uri.parse(it))
             startActivity(intent)
         }
 
-
-
+// пустой, чтобы отрабатывал, но не запускался
+        viewModel.navigateToPostFragment.observe(viewLifecycleOwner) {}
 
     }.root
 }

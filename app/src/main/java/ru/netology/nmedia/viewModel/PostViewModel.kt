@@ -20,7 +20,6 @@ class PostViewModel(
 
     val sharePostContent = SingleLiveEvent<String>()
     val navigateToPostContentFromFeedFragment = SingleLiveEvent<PostEditableContent?>()
-//    val navigateToPostContentFromPostFragment = SingleLiveEvent<PostEditableContent?>()
     val navigateToPostFragment = SingleLiveEvent<Long>()
     val playVideoEventFromExternalActivity = SingleLiveEvent<String?>()
 
