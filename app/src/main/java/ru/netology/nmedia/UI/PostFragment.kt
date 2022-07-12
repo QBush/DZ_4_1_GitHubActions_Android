@@ -1,5 +1,7 @@
 package ru.netology.nmedia.UI
 
+import android.content.Intent
+import android.net.Uri
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
@@ -39,6 +41,32 @@ class PostFragment : Fragment() {
                 findPostById(currentId, it)?.let { it1 -> viewHolder.bind(it1) }
                     ?: findNavController().popBackStack()
         }
+
+        viewModel.sharePostContent.observe(this) { postContent ->
+            val intent = Intent().apply {
+                action = Intent.ACTION_SEND
+                putExtra(Intent.EXTRA_TEXT, postContent)
+                type = "text/plain"
+            }
+            val shareIntent = Intent.createChooser(
+                intent, getString(R.string.chooser_share_post)
+            )
+            startActivity(shareIntent) // отдаем неявный интент наружу
+        }
+
+        viewModel.navigateToPostContentFromFeedFragment.observe(this) {
+            val direction = FeedFragmentDirections.toPostContentFragment(it)
+            findNavController().navigate(direction)
+        }
+
+        viewModel.playVideoEventFromExternalActivity.observe(this) {
+            val intent = Intent(Intent.ACTION_VIEW, Uri.parse(it))
+            startActivity(intent)
+        }
+
+
+
+
     }.root
 }
 
