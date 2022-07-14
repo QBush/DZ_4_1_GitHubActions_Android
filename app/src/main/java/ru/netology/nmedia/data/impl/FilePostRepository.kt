@@ -2,20 +2,11 @@ package ru.netology.nmedia.data.impl
 
 import android.app.Application
 import android.content.Context
-import android.content.Intent
-import android.net.Uri
-import androidx.core.content.ContextCompat.startActivity
-import androidx.core.content.edit
-import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import com.google.gson.Gson
 import com.google.gson.reflect.TypeToken
-import kotlinx.serialization.decodeFromString
-import kotlinx.serialization.encodeToString
-import kotlinx.serialization.json.Json
 import ru.netology.nmedia.Post
 import ru.netology.nmedia.data.PostRepository
-import kotlin.properties.Delegates
 
 class FilePostRepository( // через Буфферизованные потоки
     private val application: Application
