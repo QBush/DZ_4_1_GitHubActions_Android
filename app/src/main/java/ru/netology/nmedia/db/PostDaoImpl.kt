@@ -5,6 +5,7 @@ import android.database.Cursor
 import android.database.sqlite.SQLiteDatabase
 import ru.netology.nmedia.Post
 
+// здесь реализуем обновление базы данных в зависимости от вызываемых методов. Их будем вызывать в репозитории.
 class PostDaoImpl(
     private val db: SQLiteDatabase
 ) : PostDao {
@@ -44,12 +45,24 @@ class PostDaoImpl(
         )
     }
 
+    override fun shareById(id: Long) {
+        db.execSQL(
+            """
+                UPDATE ${PostsTable.NAME} SET
+                shareCount = shareCount + 1
+                WHERE id = ?;
+            """.trimIndent(),
+            arrayOf(id)
+        )
+    }
+
 
     override fun save(post: Post): Post {
         val values = ContentValues().apply {
             put(PostsTable.Column.AUTHOR.columnName, post.author)
             put(PostsTable.Column.CONTENT.columnName, post.content)
             put(PostsTable.Column.PUBLISHED.columnName, post.published)
+            put(PostsTable.Column.VIDEO_URL.columnName, post.videoUrl)
         }
         val id = if (post.id != 0L) {
             db.update(
@@ -75,15 +88,15 @@ class PostDaoImpl(
         }
     }
 }
-
-    fun Cursor.toPost() = Post(
-        id = getLong(getColumnIndexOrThrow(PostsTable.Column.ID.columnName)),
-        author = getString(getColumnIndexOrThrow(PostsTable.Column.AUTHOR.columnName)),
-        content = getString(getColumnIndexOrThrow(PostsTable.Column.CONTENT.columnName)),
-        published = getString(getColumnIndexOrThrow(PostsTable.Column.PUBLISHED.columnName)),
-        videoUrl = getString(getColumnIndexOrThrow(PostsTable.Column.VIDEO_URL.columnName)),
-        // ниже true, если верно, false если неверно
-        likedByMe = getInt(getColumnIndexOrThrow(PostsTable.Column.LIKED_BY_ME.columnName)) != 0,
-        likeCount = getLong(getColumnIndexOrThrow(PostsTable.Column.LIKES.columnName)),
-        shareCount = getLong(getColumnIndexOrThrow(PostsTable.Column.SHARES.columnName)),
-    )
+// берет данные из строки таблицы, сохраняя их в пост
+fun Cursor.toPost() = Post(
+    id = getLong(getColumnIndexOrThrow(PostsTable.Column.ID.columnName)),
+    author = getString(getColumnIndexOrThrow(PostsTable.Column.AUTHOR.columnName)),
+    content = getString(getColumnIndexOrThrow(PostsTable.Column.CONTENT.columnName)),
+    published = getString(getColumnIndexOrThrow(PostsTable.Column.PUBLISHED.columnName)),
+    videoUrl = getString(getColumnIndexOrThrow(PostsTable.Column.VIDEO_URL.columnName)),
+    // ниже true, если верно, false если неверно. Нужен Int для этого
+    likedByMe = getInt(getColumnIndexOrThrow(PostsTable.Column.LIKED_BY_ME.columnName)) != 0,
+    likeCount = getLong(getColumnIndexOrThrow(PostsTable.Column.LIKES.columnName)),
+    shareCount = getLong(getColumnIndexOrThrow(PostsTable.Column.SHARES.columnName)),
+)

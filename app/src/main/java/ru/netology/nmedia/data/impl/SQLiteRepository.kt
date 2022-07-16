@@ -49,6 +49,7 @@ class SQLiteRepository(
 
 
     override fun share(id: Long) {
+        dao.shareById(id)
         data.value = posts.map {
             if (it.id == id) {
                 it.copy(shareCount = it.shareCount+1)

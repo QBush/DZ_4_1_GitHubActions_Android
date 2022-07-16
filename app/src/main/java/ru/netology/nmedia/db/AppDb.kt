@@ -4,7 +4,9 @@ import android.content.Context
 import android.database.sqlite.SQLiteDatabase
 
 // класс Синглтон, не вдаваться в подробности, просто вот так он создается.
+
 class AppDb private constructor(db: SQLiteDatabase) {
+
     val postDao: PostDao = PostDaoImpl(db)
 
     companion object {
