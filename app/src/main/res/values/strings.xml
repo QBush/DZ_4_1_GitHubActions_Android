@@ -1,3 +1,22 @@
 <resources>
-    <string name="app_name">DZ_1_Git_Hub_Action</string>
+    <string name="app_name">NMedia</string>
+    <string name="Gracia">NMedia!</string>
+    <string name="author_avatar">Avtor avatar</string>
+    <string name="remove">Remove</string>
+    <string name="post_text">
+        Nethology.Nethology.Nethology.Nethology.Nethology.Nethology.\n
+        Nethology.Nethology.Nethology.Nethology.Nethology.Nethology.
+    </string>
+    <string name="menu_edit">Edit</string>
+    <string name="error_empty_content">Content can\'t be empty</string>
+    <string name="description_post_like">Like</string>
+    <string name="description_post_menu">Post menu</string>
+    <string name="description_post_share">Share</string>
+    <string name="description_post_save">Save</string>
+    <string name="cancel_edit">Cancel edit</string>
+    <string name="new_post_hint">Start to write...</string>
+    <string name="chooser_share_post">Share post</string>
+    <string name="add_post">Add post</string>
+    <string name="save">Save</string>
+    <string name="video_url">Video URL</string>
 </resources>
