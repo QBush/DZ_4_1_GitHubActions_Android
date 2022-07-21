@@ -8,6 +8,7 @@ import ru.netology.nmedia.PostEditableContent
 import ru.netology.nmedia.adapter.PostInteractionListener
 import ru.netology.nmedia.data.PostRepository
 import ru.netology.nmedia.data.impl.FilePostRepository
+import ru.netology.nmedia.data.impl.PostRepositoryImpl
 import ru.netology.nmedia.data.impl.SQLiteRepository
 import ru.netology.nmedia.db.AppDb
 import ru.netology.nmedia.utils.SingleLiveEvent
@@ -16,7 +17,7 @@ class PostViewModel(
     application: Application
 ) : AndroidViewModel(application), PostInteractionListener {
 
-    private val repository: PostRepository = SQLiteRepository(
+    private val repository: PostRepository = PostRepositoryImpl(
         dao = AppDb.getInstance(
             context = application
         ).postDao
