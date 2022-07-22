@@ -13,18 +13,14 @@ class PostRepositoryImpl(
     private val dao: PostDao
 ) : PostRepository {
 
-    private val posts // значение data.value, проверенное на null
-        get() = checkNotNull(data.value) {
-            "value should not be null"
-        }
-
     // берем данные из БД и преобразуем каждую из строк в пост и возвращаем массив из них
     override val data = dao.getAll().map{ entities ->
         entities.map { it.toModel() }
     }
 
     override fun save(post: Post) {
-       dao.save(post.toEntity())
+        if (post.id == NEW_POST_ID) dao.insert(post.toEntity())
+        else dao.updateContentById(post.id, post.content)
     }
 
     override fun like(postId: Long) {

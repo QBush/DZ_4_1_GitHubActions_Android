@@ -17,9 +17,6 @@ interface PostDao {
     @Query("UPDATE posts SET content =:content WHERE id =:id")
     fun updateContentById(id: Long, content: String)
 
-    fun save(post: PostEntity) =
-        if (post.id == 0L) insert(post) else updateContentById(post.id, post.content)
-
     @Query("""
         UPDATE posts SET
         likeCount = likeCount + CASE WHEN likedByMe THEN -1 ELSE 1 END,
