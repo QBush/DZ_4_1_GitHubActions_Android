@@ -16,7 +16,7 @@ class PostEntity(
     @ColumnInfo(name = "publishedDate")
     val published: String,
     @ColumnInfo(name = "videoUrl")
-    var videoUrl: String,
+    var videoUrl: String?,
     @ColumnInfo(name = "likedByMe")
     var likedByMe: Boolean,
     @ColumnInfo(name = "likeCount")

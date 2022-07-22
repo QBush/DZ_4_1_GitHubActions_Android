@@ -5,6 +5,7 @@ import androidx.room.*
 import ru.netology.nmedia.Post
 import ru.netology.nmedia.data.PostRepository
 
+//интерфейс, для приема/отдачи данных из/в БД
 @Dao
 interface PostDao {
     @Query("SELECT * FROM posts ORDER BY id DESC") // выбрали из таблицы posts, сортируем DESC

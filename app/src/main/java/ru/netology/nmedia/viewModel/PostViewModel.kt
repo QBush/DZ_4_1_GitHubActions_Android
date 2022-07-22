@@ -7,9 +7,7 @@ import ru.netology.nmedia.Post
 import ru.netology.nmedia.PostEditableContent
 import ru.netology.nmedia.adapter.PostInteractionListener
 import ru.netology.nmedia.data.PostRepository
-import ru.netology.nmedia.data.impl.FilePostRepository
 import ru.netology.nmedia.data.impl.PostRepositoryImpl
-import ru.netology.nmedia.data.impl.SQLiteRepository
 import ru.netology.nmedia.db.AppDb
 import ru.netology.nmedia.utils.SingleLiveEvent
 

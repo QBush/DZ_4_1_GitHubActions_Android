@@ -2,12 +2,19 @@ package ru.netology.nmedia.db
 
 import android.content.Context
 import android.database.sqlite.SQLiteDatabase
+import androidx.room.Database
+import androidx.room.Room
+import androidx.room.RoomDatabase
 
 // класс Синглтон, не вдаваться в подробности, просто вот так он создается.
 
-class AppDb private constructor(db: SQLiteDatabase) {
+@Database(
+    entities = [PostEntity::class], // из чего состоит таблица
+    version = 1 // порядковый номер версии
+)
+abstract class AppDb : RoomDatabase() {
 
-    val postDao: PostDao = PostDaoImpl(db)
+    abstract val postDao: PostDao
 
     companion object {
         @Volatile
@@ -17,15 +24,15 @@ class AppDb private constructor(db: SQLiteDatabase) {
         // безопасное создание синглтона
         fun getInstance(context: Context): AppDb {
             return instance ?: synchronized(this) {
-                instance ?: AppDb(
-                    buildDatabase(context, arrayOf(PostsTable.DDL))
-                ).also { instance = it }
+                instance ?: buildDatabase(context).also { instance = it }
             }
         }
 
-        // создаем DbHelper
-        private fun buildDatabase(context: Context, DDLs: Array<String>) = DbHelper(
-            context, 1, "app.db", DDLs
-        ).writableDatabase
+        // передаем контекст, класс и имя файла ДБ, куда сохранять
+        private fun buildDatabase(context: Context) =
+            Room.databaseBuilder(
+                context, AppDb::class.java, "app.db"
+            ).allowMainThreadQueries() // не заморачиваемся, это для работы из основного потока
+                .build()
     }
 }
