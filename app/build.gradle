@@ -6,6 +6,7 @@ plugins {
     id 'kotlin-parcelize'
     id 'kotlin-android'
     id 'kotlin-kapt'
+    id 'com.google.gms.google-services'
 }
 
 android {
@@ -72,4 +73,8 @@ dependencies {
     // Room
     implementation "androidx.room:room-runtime:2.4.2"
     kapt "androidx.room:room-compiler:2.4.2"
+
+    // google fireBase
+    implementation platform('com.google.firebase:firebase-bom:30.3.1')
+    implementation "com.google.firebase:firebase-messaging-ktx"
 }
