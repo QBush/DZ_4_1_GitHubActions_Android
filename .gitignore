@@ -26,3 +26,5 @@ captures/
 .cxx
 
 
+google-services.json
+fcm.json
